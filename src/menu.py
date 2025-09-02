@@ -209,6 +209,54 @@ def customer_signup():
         print("Username already exists. Try again.")
         customer_signup()
 
+def customer_main_menu(user):
+    from services.car_service import CarService
+    from services.rental_service import RentalService
+    while True:
+        print(f"\nCustomer Menu - {user.username}")
+        print("1. Book Rental")
+        print("2. Logout")
+        choice = input("Enter choice: ").strip()
+        if choice == '1':
+            book_rental_menu(user)
+        elif choice == '2':
+            print("Logging out...")
+            main_menu()
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+def book_rental_menu(user):
+    from services.car_service import CarService
+    from services.rental_service import RentalService
+    print("\nAvailable Cars:")
+    cars = CarService.get_available_cars()
+    if not cars:
+        print("No cars available for rental.")
+        return
+    for car in cars:
+        print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]}")
+    car_id = input("Enter Car ID to book: ").strip()
+    try:
+        car_id = int(car_id)
+    except ValueError:
+        print("Invalid Car ID.")
+        return
+    start_date = input("Enter rental start date (YYYY-MM-DD): ").strip()
+    end_date = input("Enter rental end date (YYYY-MM-DD): ").strip()
+    extra_charges = 0.0
+    total_fee = RentalService.calculate_rental_fee(car_id, start_date, end_date, extra_charges)
+    print(f"Total rental fee: ${total_fee}")
+    confirm = input("Confirm booking? (yes/no): ").strip().lower()
+    if confirm == 'yes':
+        success = RentalService.book_rental(user_id=user.id, car_id=car_id, start_date=start_date, end_date=end_date, total_fee=total_fee)
+        if success:
+            print("Rental booked successfully! Pending approval.")
+        else:
+            print("Failed to book rental.")
+    else:
+        print("Booking cancelled.")
+
 def customer_login():
     print("\nCustomer Login")
     username = input("Username: ").strip()
@@ -216,7 +264,7 @@ def customer_login():
     user = UserService.login_user(username, password)
     if user and user.role == 'customer':
         print(f"Welcome, {username}!")
-        # Customer menu logic here
+        customer_main_menu(user)
     else:
         print("Invalid customer credentials.")
         customer_menu()
