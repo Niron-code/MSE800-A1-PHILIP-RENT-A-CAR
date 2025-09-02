@@ -36,17 +36,19 @@ def admin_login():
 
 def admin_menu(username):
     from services.car_service import CarService
-    
+    from services.rental_service import RentalService
     while True:
         print("\nAdmin Menu")
         print("1. Manage Cars")
-        print("2. Change Password")
-        print("3. Logout")
+        print("2. Approve/Reject Rentals")
+        print("3. Change Password")
+        print("4. Logout")
         choice = input("Enter choice: ").strip()
-        
         if choice == '1':
             car_management_menu()
         elif choice == '2':
+            rental_approval_menu()
+        elif choice == '3':
             old_pw = input("Enter current password: ").strip()
             new_pw = input("Enter new password: ").strip()
             success = UserService.change_admin_password(username, old_pw, new_pw)
@@ -54,12 +56,45 @@ def admin_menu(username):
                 print("Password changed successfully.")
             else:
                 print("Incorrect current password.")
-        elif choice == '3':
+        elif choice == '4':
             print("Logging out...")
             main_menu()
             break
         else:
             print("Invalid choice. Try again.")
+
+def rental_approval_menu():
+    from services.rental_service import RentalService
+    print("\nPending Rental Requests:")
+    pending = RentalService.get_pending_rentals()
+    if not pending:
+        print("No pending rentals.")
+        return
+    for rental in pending:
+        print(f"ID: {rental[0]}, User ID: {rental[1]}, Car ID: {rental[2]}, Start: {rental[3]}, End: {rental[4]}, Fee: {rental[6]}, Status: {rental[5]}")
+    rental_id = input("Enter Rental ID to approve/reject (or press Enter to go back): ").strip()
+    if not rental_id:
+        return
+    try:
+        rental_id = int(rental_id)
+    except ValueError:
+        print("Invalid Rental ID.")
+        return
+    action = input("Approve or Reject? (a/r): ").strip().lower()
+    if action == 'a':
+        success = RentalService.update_rental_status(rental_id, 'approved')
+        if success:
+            print("Rental approved.")
+        else:
+            print("Failed to approve rental.")
+    elif action == 'r':
+        success = RentalService.update_rental_status(rental_id, 'rejected')
+        if success:
+            print("Rental rejected.")
+        else:
+            print("Failed to reject rental.")
+    else:
+        print("Invalid action.")
 
 def car_management_menu():
     from services.car_service import CarService

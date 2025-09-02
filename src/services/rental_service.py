@@ -23,9 +23,9 @@ class RentalService:
     @staticmethod
     def get_pending_rentals():
         """Return a list of pending rental requests."""
-        return Rental.get_pending()
+        return RentalDAO.get_pending_rentals()
 
     @staticmethod
     def update_rental_status(rental_id: int, status: str) -> bool:
         """Update the status of a rental (approve/reject)."""
-        return Rental.update_status(rental_id, status)
+        return RentalDAO.update_rental_status(rental_id, status)
