@@ -20,12 +20,12 @@ class UserDAO:
     def get_user_by_credentials(username: str, password: str) -> Optional[User]:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT username, password, role FROM users WHERE username=? AND password=?', (username, password))
+        cursor.execute('SELECT id, username, password, role FROM users WHERE username=? AND password=?', (username, password))
         result = cursor.fetchone()
         conn.close()
         if result:
-            username, password, role = result
-            return UserFactory.create_user(username, password, role)
+            id, username, password, role = result
+            return UserFactory.create_user(id, username, password, role)
         return None
 
     @staticmethod
