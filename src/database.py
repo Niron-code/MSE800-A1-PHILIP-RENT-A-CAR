@@ -27,7 +27,9 @@ def init_db():
             mileage INTEGER NOT NULL,
             available_now INTEGER NOT NULL,
             min_rent_period INTEGER NOT NULL,
-            max_rent_period INTEGER NOT NULL
+            max_rent_period INTEGER NOT NULL,
+            car_type TEXT CHECK(car_type IN ('luxury', 'sedan', 'suv')) NOT NULL,
+            base_rate_per_day REAL NOT NULL
         )
     ''')
     # Rentals table

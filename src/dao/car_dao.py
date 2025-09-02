@@ -8,9 +8,13 @@ class CarDAO:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO cars (make, model, year, mileage, available_now, min_rent_period, max_rent_period)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (car.make, car.model, car.year, car.mileage, car.available_now, car.min_rent_period, car.max_rent_period))
+            INSERT INTO cars (
+                make, model, year, mileage, available_now, 
+                min_rent_period, max_rent_period, car_type, base_rate_per_day
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (car.make, car.model, car.year, car.mileage, car.available_now,
+              car.min_rent_period, car.max_rent_period, car.car_type, car.base_rate_per_day))
         conn.commit()
         conn.close()
         return True
