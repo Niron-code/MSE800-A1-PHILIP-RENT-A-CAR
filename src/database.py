@@ -44,5 +44,9 @@ def init_db():
             FOREIGN KEY(car_id) REFERENCES cars(id)
         )
     ''')
+    # Insert default admin if not exists
+    cursor.execute('SELECT * FROM users WHERE username=? AND role=?', ('admin', 'admin'))
+    if not cursor.fetchone():
+        cursor.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', ('admin', 'admin123', 'admin'))
     conn.commit()
     conn.close()
