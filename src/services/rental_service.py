@@ -39,3 +39,18 @@ class RentalService:
     def get_car_status_for_dates(start_date, end_date):
         """Get the status of cars for specific dates."""
         return RentalDAO.get_car_status_for_dates(start_date, end_date)
+
+    @staticmethod
+    def cancel_booking(rental_id: int, user_id: int) -> bool:
+        """Cancel a booking for a user."""
+        return RentalDAO.cancel_booking(rental_id, user_id)
+
+    @staticmethod
+    def update_booking(rental_id: int, user_id: int, start_date: str, end_date: str, car_id: int = None) -> bool:
+        """Update a booking for a user."""
+        return RentalDAO.update_booking(rental_id, user_id, start_date, end_date, car_id)
+
+    @staticmethod
+    def get_bookings_for_user(user_id: int):
+        """Get all bookings for a user."""
+        return RentalDAO.get_bookings_for_user(user_id)
