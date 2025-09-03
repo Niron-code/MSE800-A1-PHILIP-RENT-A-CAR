@@ -39,3 +39,14 @@ class UserDAO:
             conn.close()
             return True
         return False
+
+    @staticmethod
+    def get_user_email_by_id(user_id: int) -> Optional[str]:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT email FROM users WHERE id=?', (user_id,))
+        result = cursor.fetchone()
+        conn.close()
+        if result:
+            return result[0]
+        return None
