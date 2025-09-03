@@ -5,7 +5,7 @@ class UserService:
     @staticmethod
     def register_user(username: str, password: str, role: str) -> bool:
         """Register a new user (admin or customer). Returns True if successful, False if username exists."""
-        return UserDAO.register_user(UserFactory.create_user(username, password, role))
+        return UserDAO.register_user(UserFactory.create_user(None,username, password, role))
 
     @staticmethod
     def login_user(username: str, password: str):
