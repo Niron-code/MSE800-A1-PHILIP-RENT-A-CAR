@@ -1,8 +1,8 @@
 from models.rental import Rental
 from database import get_connection
-from typing import List, Optional, Tuple
+from typing import List,  Tuple
 from datetime import datetime
-from models.car import CarFactory, LuxuryCar, SedanCar, SUVCar
+from models.car import CarFactory
 
 class RentalDAO:
     @staticmethod
