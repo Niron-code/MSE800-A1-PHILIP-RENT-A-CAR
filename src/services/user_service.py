@@ -3,9 +3,9 @@ from dao.user_dao import UserDAO
 
 class UserService:
     @staticmethod
-    def register_user(username: str, password: str, role: str) -> bool:
+    def register_user(username: str, password: str, email: str, role: str) -> bool:
         """Register a new user. Returns True if successful, False if username exists."""
-        return UserDAO.register_user(UserFactory.create_user(None,username, password, role))
+        return UserDAO.register_user(UserFactory.create_user(None, username, password, email, role))
 
     @staticmethod
     def login_user(username: str, password: str):
@@ -13,12 +13,12 @@ class UserService:
         from database import get_connection
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT id, username, password, role FROM users WHERE username=? AND password=?', (username, password))
+        cursor.execute('SELECT id, username, password, email, role FROM users WHERE username=? AND password=?', (username, password))
         result = cursor.fetchone()
         conn.close()
         if result:
-            id, username, password, role = result
-            return UserFactory.create_user(id, username, password, role)
+            id, username, password, email, role = result
+            return UserFactory.create_user(id, username, password, email, role)
         return None
 
 
@@ -47,6 +47,6 @@ class AdminService(UserService):
 
 class CustomerService(UserService):
     @staticmethod
-    def register_customer(username: str, password: str) -> bool:
+    def register_customer(username: str, password: str, email: str) -> bool:
         """Register a new customer."""
-        return UserService.register_user(username, password, 'customer')
+        return UserService.register_user(username, password, email, 'customer')

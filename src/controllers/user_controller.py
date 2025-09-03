@@ -87,7 +87,8 @@ class CustomerUserController(UserController):
         print("\nCustomer Registration")
         username = input("Choose a username: ").strip()
         password = input("Choose a password: ").strip()
-        success = UserService.register_user(username, password, 'customer')
+        email = input("Enter your email: ").strip()
+        success = UserService.register_user(username, password, email, 'customer')
         if success:
             print("Registration successful! Please login.")
             CustomerUserController.customer_login()
@@ -102,7 +103,7 @@ class CustomerUserController(UserController):
         password = input("Password: ").strip()
         user = UserService.login_user(username, password)
         if user and user.role == 'customer':
-            print(f"Welcome, {username}!")
+            print(f"Welcome, {username}! Email: {user.email}")
             CustomerUserController.customer_main_menu(user)
         else:
             print("Invalid customer credentials.")
@@ -110,15 +111,18 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_main_menu(user):
-        from controllers.rental_controller import book_rental_menu
+        from controllers.rental_controller import book_rental_menu, customer_booking_menu
         while True:
             print(f"\nCustomer Menu - {user.username}")
             print("1. Book Rental")
-            print("2. Logout")
+            print("2. Manage My Bookings")
+            print("3. Logout")
             choice = input("Enter choice: ").strip()
             if choice == '1':
                 book_rental_menu(user)
             elif choice == '2':
+                customer_booking_menu(user)
+            elif choice == '3':
                 print("Logging out...")
                 UserController.user_main_menu()
                 break
