@@ -13,6 +13,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
+            email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             role TEXT CHECK(role IN ('customer', 'admin')) NOT NULL
         )
@@ -40,7 +41,7 @@ def init_db():
             car_id INTEGER NOT NULL,
             start_date TEXT NOT NULL,
             end_date TEXT NOT NULL,
-            status TEXT CHECK(status IN ('pending', 'approved', 'rejected')) NOT NULL DEFAULT 'pending',
+            status TEXT CHECK(status IN ('pending', 'approved', 'rejected', 'cancelled')) NOT NULL DEFAULT 'pending',
             total_fee REAL,
             FOREIGN KEY(user_id) REFERENCES users(id),
             FOREIGN KEY(car_id) REFERENCES cars(id)
@@ -49,6 +50,21 @@ def init_db():
     # Insert default admin if not exists
     cursor.execute('SELECT * FROM users WHERE username=? AND role=?', ('admin', 'admin'))
     if not cursor.fetchone():
-        cursor.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', ('admin', 'admin123', 'admin'))
+        cursor.execute('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', ('admin', 'philip.car.rental@gmail.com', 'admin123', 'admin'))
+    # Insert or update 3 default cars
+    default_cars = [
+        ('Mercedes-Benz', 'S-Class', 2025, 1500, 1, 2, 10, 'luxury', 200.0),
+        ('Toyota', 'RAV4', 2024, 5000, 1, 3, 14, 'suv', 150.0), 
+        ('Honda', 'Accord', 2023, 8000, 1, 4, 15, 'sedan', 100.0)
+    ]
+    for make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day in default_cars:
+        cursor.execute('''SELECT id FROM cars WHERE make=? AND model=? AND year=?''', (make, model, year))
+        car = cursor.fetchone()
+        if car:
+            cursor.execute('''UPDATE cars SET mileage=?, available_now=?, min_rent_period=?, max_rent_period=?, car_type=?, base_rate_per_day=? WHERE id=?''',
+                (mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day, car[0]))
+        else:
+            cursor.execute('''INSERT INTO cars (make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                (make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day))
     conn.commit()
     conn.close()
