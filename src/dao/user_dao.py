@@ -8,7 +8,7 @@ class UserDAO:
         conn = get_connection()
         cursor = conn.cursor()
         try:
-            cursor.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', (user.username, user.password, user.role))
+            cursor.execute('INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)', (user.username, user.password, user.role, user.email))
             conn.commit()
             return True
         except Exception:
