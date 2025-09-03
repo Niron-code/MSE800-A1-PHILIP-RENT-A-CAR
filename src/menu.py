@@ -262,23 +262,41 @@ def customer_main_menu(user):
             print("Invalid choice. Try again.")
 
 def book_rental_menu(user):
-    from services.car_service import CarService
     from services.rental_service import RentalService
-    print("\nAvailable Cars:")
-    cars = CarService.get_available_cars()
-    if not cars:
-        print("No cars available for rental.")
-        return
+    print("\nEnter rental start date (YYYY-MM-DD): ")
+    start_date = input().strip()
+    print("Enter rental end date (YYYY-MM-DD): ")
+    end_date = input().strip()
+    cars, car_status = RentalService.get_car_status_for_dates(start_date, end_date)
+    available_cars = [car for car in cars if car_status.get(car[0], 'available') == 'available']
+    print("\nCars for selected dates:")
     for car in cars:
-        print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]}")
-    car_id = input("Enter Car ID to book: ").strip()
+        status = car_status.get(car[0], 'available')
+        if status == 'available':
+                customer_friendly_status = "AVAILABLE"
+                print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]} - {customer_friendly_status}")
+        elif status == 'pending':
+                customer_friendly_status = "Booking Requested"
+                print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]} - {customer_friendly_status}")
+        elif status == 'approved':
+                customer_friendly_status = "Booked Already"
+                print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]} - {customer_friendly_status}")
+        else:
+                customer_friendly_status = f"UNAVAILABLE ({status})"
+                print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]} - {customer_friendly_status}")
+    if not available_cars:
+        print("No cars available for booking for the selected dates.")
+        return
+    car_id = input("Enter Car ID to book (only AVAILABLE): ").strip()
     try:
         car_id = int(car_id)
     except ValueError:
         print("Invalid Car ID.")
         return
-    start_date = input("Enter rental start date (YYYY-MM-DD): ").strip()
-    end_date = input("Enter rental end date (YYYY-MM-DD): ").strip()
+    if car_id not in [car[0] for car in available_cars]:
+        print("Selected car is not available for booking.")
+        return
+    from services.rental_service import RentalService
     extra_charges = 0.0
     total_fee = RentalService.calculate_rental_fee(car_id, start_date, end_date, extra_charges)
     print(f"Total rental fee: ${total_fee}")
