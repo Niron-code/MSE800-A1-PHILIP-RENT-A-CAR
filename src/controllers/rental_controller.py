@@ -78,3 +78,49 @@ def book_rental_menu(user):
             print("Failed to book rental.")
     else:
         print("Booking cancelled.")
+
+def customer_booking_menu(user):
+    while True:
+        print("\nBooking Management Menu")
+        print("1. View My Bookings")
+        print("2. Cancel a Booking")
+        print("3. Update a Booking")
+        print("4. Back to Customer Menu")
+        choice = input("Enter choice: ").strip()
+        if choice == '1':
+            bookings = RentalService.get_bookings_for_user(user.id)
+            if not bookings:
+                print("No bookings found.")
+            else:
+                for booking in bookings:
+                    print(f"ID: {booking[0]}, Car ID: {booking[2]}, Start: {booking[3]}, End: {booking[4]}, Fee: {booking[5]}, Status: {booking[6]}")
+        elif choice == '2':
+            rental_id = input("Enter Booking ID to cancel: ").strip()
+            try:
+                rental_id = int(rental_id)
+                success = RentalService.cancel_booking(rental_id, user.id)
+                if success:
+                    print("Booking cancelled successfully.")
+                else:
+                    print("Failed to cancel booking or booking not found.")
+            except ValueError:
+                print("Invalid Booking ID.")
+        elif choice == '3':
+            rental_id = input("Enter Booking ID to update: ").strip()
+            try:
+                rental_id = int(rental_id)
+                start_date = input("Enter new start date (YYYY-MM-DD): ").strip()
+                end_date = input("Enter new end date (YYYY-MM-DD): ").strip()
+                car_id = input("Enter new Car ID (or press Enter to keep current): ").strip()
+                car_id = int(car_id) if car_id else None
+                success = RentalService.update_booking(rental_id, user.id, start_date, end_date, car_id)
+                if success:
+                    print("Booking updated successfully.")
+                else:
+                    print("Failed to update booking. Only pending bookings can be updated.")
+            except ValueError:
+                print("Invalid input.")
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Try again.")

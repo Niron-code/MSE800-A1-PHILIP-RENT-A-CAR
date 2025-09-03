@@ -1,6 +1,6 @@
 from models.rental import Rental
 from database import get_connection
-from typing import List,  Tuple
+from typing import List, Optional, Tuple
 from datetime import datetime
 from models.car import CarFactory
 
@@ -77,7 +77,7 @@ class RentalDAO:
         for car in cars:
             car_id = car[0]
             cursor.execute('''
-                SELECT status FROM rentals WHERE car_id=? AND NOT (
+                SELECT status FROM rentals WHERE car_id=? AND status != "cancelled" AND NOT (
                     end_date < ? OR start_date > ?
                 )
             ''', (car_id, start_date, end_date))
@@ -88,3 +88,46 @@ class RentalDAO:
                 car_status[car_id] = 'available'
         conn.close()
         return cars, car_status
+
+    @staticmethod
+    def cancel_booking(rental_id: int, user_id: int) -> bool:
+        """Cancel a booking if it belongs to the user and is not already cancelled."""
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
+        result = cursor.fetchone()
+        if result and result[0] != 'cancelled':
+            cursor.execute('UPDATE rentals SET status="cancelled" WHERE id=? AND user_id=?', (rental_id, user_id))
+            conn.commit()
+            conn.close()
+            return True
+        conn.close()
+        return False
+
+    @staticmethod
+    def update_booking(rental_id: int, user_id: int, start_date: str, end_date: str, car_id: int = None) -> bool:
+        """Update booking dates or car if booking belongs to user and is pending."""
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
+        result = cursor.fetchone()
+        if result and result[0] == 'pending':
+            if car_id:
+                cursor.execute('UPDATE rentals SET start_date=?, end_date=?, car_id=? WHERE id=? AND user_id=?', (start_date, end_date, car_id, rental_id, user_id))
+            else:
+                cursor.execute('UPDATE rentals SET start_date=?, end_date=? WHERE id=? AND user_id=?', (start_date, end_date, rental_id, user_id))
+            conn.commit()
+            conn.close()
+            return True
+        conn.close()
+        return False
+
+    @staticmethod
+    def get_bookings_for_user(user_id: int) -> List[Tuple]:
+        """Return all bookings for a given user."""
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM rentals WHERE user_id=?', (user_id,))
+        bookings = cursor.fetchall()
+        conn.close()
+        return bookings
