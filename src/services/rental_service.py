@@ -29,3 +29,13 @@ class RentalService:
     def update_rental_status(rental_id: int, status: str) -> bool:
         """Update the status of a rental (approve/reject)."""
         return RentalDAO.update_rental_status(rental_id, status)
+    
+    @staticmethod
+    def get_available_cars_for_specific_dates(start_date: str, end_date: str):
+        """Get a list of available cars for specific dates."""
+        return RentalDAO.get_available_cars_for_specific_dates(start_date, end_date)
+
+    @staticmethod
+    def get_car_status_for_dates(start_date, end_date):
+        """Get the status of cars for specific dates."""
+        return RentalDAO.get_car_status_for_dates(start_date, end_date)

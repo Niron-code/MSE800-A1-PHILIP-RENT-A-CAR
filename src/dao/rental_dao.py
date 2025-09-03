@@ -66,3 +66,25 @@ class RentalDAO:
         conn.commit()
         conn.close()
         return True
+
+    @staticmethod
+    def get_car_status_for_dates(start_date, end_date):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM cars')
+        cars = cursor.fetchall()
+        car_status = {}
+        for car in cars:
+            car_id = car[0]
+            cursor.execute('''
+                SELECT status FROM rentals WHERE car_id=? AND NOT (
+                    end_date < ? OR start_date > ?
+                )
+            ''', (car_id, start_date, end_date))
+            result = cursor.fetchone()
+            if result:
+                car_status[car_id] = result[0]
+            else:
+                car_status[car_id] = 'available'
+        conn.close()
+        return cars, car_status
