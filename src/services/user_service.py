@@ -4,7 +4,7 @@ from dao.user_dao import UserDAO
 class UserService:
     @staticmethod
     def register_user(username: str, password: str, role: str) -> bool:
-        """Register a new user (admin or customer). Returns True if successful, False if username exists."""
+        """Register a new user. Returns True if successful, False if username exists."""
         return UserDAO.register_user(UserFactory.create_user(None,username, password, role))
 
     @staticmethod
@@ -27,6 +27,7 @@ class UserService:
         """Return the type of user (admin, customer, or other)."""
         return getattr(user_obj, 'role', None)
 
+class AdminService(UserService):
     @staticmethod
     def change_admin_password(username: str, old_password: str, new_password: str) -> bool:
         """
@@ -43,3 +44,9 @@ class UserService:
             conn.close()
             return True
         return False
+
+class CustomerService(UserService):
+    @staticmethod
+    def register_customer(username: str, password: str) -> bool:
+        """Register a new customer."""
+        return UserService.register_user(username, password, 'customer')
