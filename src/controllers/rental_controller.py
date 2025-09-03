@@ -1,4 +1,7 @@
+from email.mime.text import MIMEText
+from dao.user_dao import UserDAO
 from services.rental_service import RentalService
+from services.email_service import EmailService
 
 def rental_approval_menu():
     print("\nPending Rental Requests:")
@@ -17,16 +20,29 @@ def rental_approval_menu():
         print("Invalid Rental ID.")
         return
     action = input("Approve or Reject? (a/r): ").strip().lower()
+    rental = next((r for r in pending if r[0] == rental_id), None)
+    if not rental:
+        print("Rental not found.")
+        return
+    user_email = UserDAO.get_user_email_by_id(rental[1])
+    car_id = rental[2]
+    start_date = rental[3]
+    end_date = rental[4]
     if action == 'a':
         success = RentalService.update_rental_status(rental_id, 'approved')
         if success:
             print("Rental approved.")
+            if user_email:
+                amount = rental[6]
+                EmailService.send_approval_email(user_email, car_id, start_date, end_date, amount)
         else:
             print("Failed to approve rental.")
     elif action == 'r':
         success = RentalService.update_rental_status(rental_id, 'rejected')
         if success:
             print("Rental rejected.")
+            if user_email:
+                EmailService.send_rejection_email(user_email, car_id, start_date, end_date)
         else:
             print("Failed to reject rental.")
     else:
