@@ -1,5 +1,10 @@
 from services.user_service import UserService
+import pwinput
 
+
+# Forward declarations for type hints
+AdminUserController = None
+CustomerUserController = None
 
 class UserController:
     @staticmethod
@@ -11,9 +16,9 @@ class UserController:
         print("0. Exit")
         choice = input("Enter choice (1/2): ").strip()
         if choice == '1':
-            AdminUserController.admin_login()
+            globals()['AdminUserController'].admin_login()
         elif choice == '2':
-            CustomerUserController.customer_menu()
+            globals()['CustomerUserController'].customer_menu()
         elif choice == '0':
             print("Exiting...")
             exit()
@@ -27,7 +32,7 @@ class AdminUserController(UserController):
     def admin_login():
         print("\nAdmin Login")
         username = input("Username: ").strip()
-        password = input("Password: ").strip()
+        password = pwinput.pwinput("Password: ").strip()
         user = UserService.login_user(username, password)
         if user and user.role == 'admin':
             print(f"Welcome, Admin {username}!")
@@ -52,8 +57,8 @@ class AdminUserController(UserController):
             elif choice == '2':
                 rental_approval_menu()
             elif choice == '3':
-                old_pw = input("Enter current password: ").strip()
-                new_pw = input("Enter new password: ").strip()
+                old_pw = pwinput.pwinput("Enter current password: ").strip()
+                new_pw = pwinput.pwinput("Enter new password: ").strip()
                 success = UserService.change_admin_password(username, old_pw, new_pw)
                 if success:
                     print("Password changed successfully.")
@@ -86,7 +91,7 @@ class CustomerUserController(UserController):
     def customer_signup():
         print("\nCustomer Registration")
         username = input("Choose a username: ").strip()
-        password = input("Choose a password: ").strip()
+        password = pwinput.pwinput("Choose a password: ").strip()
         email = input("Enter your email: ").strip()
         success = UserService.register_user(username, password, email, 'customer')
         if success:
@@ -100,7 +105,7 @@ class CustomerUserController(UserController):
     def customer_login():
         print("\nCustomer Login")
         username = input("Username: ").strip()
-        password = input("Password: ").strip()
+        password = pwinput.pwinput("Password: ").strip()
         user = UserService.login_user(username, password)
         if user and user.role == 'customer':
             print(f"Welcome, {username}! Email: {user.email}")
@@ -128,3 +133,7 @@ class CustomerUserController(UserController):
                 break
             else:
                 print("Invalid choice. Try again.")
+
+# Assign classes to globals for forward reference
+globals()['AdminUserController'] = AdminUserController
+globals()['CustomerUserController'] = CustomerUserController
