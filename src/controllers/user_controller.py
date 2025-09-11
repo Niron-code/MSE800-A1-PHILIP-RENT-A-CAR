@@ -91,7 +91,13 @@ class CustomerUserController(UserController):
     def customer_signup():
         print("\nCustomer Registration")
         username = input("Choose a username: ").strip()
-        password = pwinput.pwinput("Choose a password: ").strip()
+        while True:
+            password = pwinput.pwinput("Choose a password: ").strip()
+            confirm_password = pwinput.pwinput("Confirm password: ").strip()
+            if password != confirm_password:
+                print("Passwords do not match. Please try again.")
+            else:
+                break
         email = input("Enter your email: ").strip()
         success = UserService.register_user(username, password, email, 'customer')
         if success:
