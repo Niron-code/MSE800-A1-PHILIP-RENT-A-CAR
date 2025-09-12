@@ -26,7 +26,7 @@ class EmailService:
     @staticmethod
     def send_approval_email(to_email, car_id, start_date, end_date, amount):
         subject = "Philip Rent-A-Car: Your Car Rental Has Been Approved"
-        body = f"Your booking for car ID {car_id} from {start_date} to {end_date} has been approved. The total amount is ${amount}."
+        body = f"Your booking for car ID {car_id} from {start_date} to {end_date} has been approved. The total amount is ${amount}. Due upon pickup."
         EmailService.send_email(to_email, subject, body)
 
     @staticmethod
