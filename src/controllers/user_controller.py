@@ -1,7 +1,9 @@
+
 from services.user_service import UserService
 import pwinput
 from controllers.car_controller import car_management_menu
 from controllers.rental_controller import rental_approval_menu, book_rental_menu, customer_booking_menu
+from utils import Utils
 
 
 # Forward declarations for type hints
@@ -63,8 +65,11 @@ class AdminUserController(UserController):
                     confirm_pw = pwinput.pwinput("Confirm new password: ").strip()
                     if new_pw != confirm_pw:
                         print("Passwords do not match. Please try again.")
-                    else:
-                        break
+                        continue
+                    if not Utils.is_valid_password(new_pw):
+                        print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                        continue
+                    break
                 from services.user_service import AdminService
                 success = AdminService.change_admin_password(username, old_pw, new_pw)
                 if success:
@@ -103,8 +108,11 @@ class CustomerUserController(UserController):
             confirm_password = pwinput.pwinput("Confirm password: ").strip()
             if password != confirm_password:
                 print("Passwords do not match. Please try again.")
-            else:
-                break
+                continue
+            if not Utils.is_valid_password(password):
+                print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                continue
+            break
         email = input("Enter your email: ").strip()
         success = UserService.register_user(username, password, email, 'customer')
         if success:
@@ -158,8 +166,11 @@ class CustomerUserController(UserController):
             confirm_password = pwinput.pwinput("Confirm new password: ").strip()
             if new_password != confirm_password:
                 print("Passwords do not match. Please try again.")
-            else:
-                break
+                continue
+            if not Utils.is_valid_password(new_password):
+                print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                continue
+            break
         from services.user_service import CustomerService
         success = CustomerService.change_customer_password(user.username, old_password, new_password)
         if success:
