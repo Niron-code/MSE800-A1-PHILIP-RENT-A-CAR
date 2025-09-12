@@ -3,7 +3,7 @@ import pwinput
 from controllers.car_controller import car_management_menu
 from controllers.rental_controller import rental_approval_menu, book_rental_menu, customer_booking_menu
 from utils.utils import Utils
-from utils.prompt_utils import UserTexts as txts
+from utils.text_utils import UserTexts as txts
 
 # Forward declarations for type hints
 AdminUserController = None

@@ -2,7 +2,7 @@ from email.mime.text import MIMEText
 from dao.user_dao import UserDAO
 from services.rental_service import RentalService
 from services.email_service import EmailService
-from utils.prompt_utils import RentalTexts as txts
+from utils.text_utils import RentalTexts as txts
 from utils.utils import Utils
 
 

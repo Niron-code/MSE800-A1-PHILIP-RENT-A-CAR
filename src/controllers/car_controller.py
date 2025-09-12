@@ -1,6 +1,6 @@
 
 from services.car_service import CarService
-from utils.prompt_utils import CarTexts as txts
+from utils.text_utils import CarTexts as txts
 
 def car_management_menu():
     while True:
