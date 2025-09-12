@@ -3,6 +3,7 @@ from dao.user_dao import UserDAO
 from services.rental_service import RentalService
 from services.email_service import EmailService
 from utils.prompt_utils import RentalTexts as txts
+from utils.utils import Utils
 
 
 def rental_approval_menu():
@@ -51,8 +52,16 @@ def rental_approval_menu():
         print(txts.invalid_action)
 
 def book_rental_menu(user):
-    start_date = input(txts.start_date_prompt).strip()
-    end_date = input(txts.end_date_prompt).strip()
+    while True:
+        start_date = input(txts.start_date_prompt).strip()
+        if not Utils.is_start_date_today_or_future(start_date):
+            print(txts.start_date_invalid)
+            continue
+        end_date = input(txts.end_date_prompt).strip()
+        if not Utils.is_end_date_valid(start_date, end_date):
+            print(txts.end_date_invalid)
+            continue
+        break
     cars, car_status = RentalService.get_car_status_for_dates(start_date, end_date)
     available_cars = [car for car in cars if car_status.get(car[0], 'available') == 'available']
     print(txts.cars_for_dates)
@@ -125,8 +134,16 @@ def customer_booking_menu(user):
             rental_id = input(txts.booking_id_update).strip()
             try:
                 rental_id = int(rental_id)
-                start_date = input(txts.new_start_date).strip()
-                end_date = input(txts.new_end_date).strip()
+                while True:
+                    start_date = input(txts.new_start_date).strip()
+                    if not Utils.is_start_date_today_or_future(start_date):
+                        print(txts.start_date_invalid)
+                        continue
+                    end_date = input(txts.new_end_date).strip()
+                    if not Utils.is_end_date_valid(start_date, end_date):
+                        print(txts.end_date_invalid)
+                        continue
+                    break
                 car_id = input(txts.new_car_id).strip()
                 car_id = int(car_id) if car_id else None
                 success = RentalService.update_booking(rental_id, user.id, start_date, end_date, car_id)

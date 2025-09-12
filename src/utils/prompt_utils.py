@@ -41,7 +41,9 @@ class RentalTexts:
     update_fail = "Failed to update booking. Only pending bookings can be updated."
     invalid_input = "Invalid input."
     invalid_choice = "Invalid choice. Try again."
-    
+    start_date_invalid = "Start date must be today or in the future."
+    end_date_invalid = "End date must be in the future and not before start date."
+
 class CarTexts:
     menu_header = "\nCar Management Menu"
     add_new_car = "1. Add New Car"
