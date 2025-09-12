@@ -58,8 +58,15 @@ class AdminUserController(UserController):
                 rental_approval_menu()
             elif choice == '3':
                 old_pw = pwinput.pwinput("Enter current password: ").strip()
-                new_pw = pwinput.pwinput("Enter new password: ").strip()
-                success = UserService.change_admin_password(username, old_pw, new_pw)
+                while True:
+                    new_pw = pwinput.pwinput("Enter new password: ").strip()
+                    confirm_pw = pwinput.pwinput("Confirm new password: ").strip()
+                    if new_pw != confirm_pw:
+                        print("Passwords do not match. Please try again.")
+                    else:
+                        break
+                from services.user_service import AdminService
+                success = AdminService.change_admin_password(username, old_pw, new_pw)
                 if success:
                     print("Password changed successfully.")
                 else:
@@ -127,18 +134,39 @@ class CustomerUserController(UserController):
             print(f"\nCustomer Menu - {user.username}")
             print("1. Book Rental")
             print("2. Manage My Bookings")
-            print("3. Logout")
+            print("3. Change Password")
+            print("4. Logout")
             choice = input("Enter choice: ").strip()
             if choice == '1':
                 book_rental_menu(user)
             elif choice == '2':
                 customer_booking_menu(user)
             elif choice == '3':
+                CustomerUserController.change_password(user)
+            elif choice == '4':
                 print("Logging out...")
                 UserController.user_main_menu()
                 break
             else:
                 print("Invalid choice. Try again.")
+
+    @staticmethod
+    def change_password(user):
+        print("\nChange Password")
+        old_password = pwinput.pwinput("Enter current password: ").strip()
+        while True:
+            new_password = pwinput.pwinput("Enter new password: ").strip()
+            confirm_password = pwinput.pwinput("Confirm new password: ").strip()
+            if new_password != confirm_password:
+                print("Passwords do not match. Please try again.")
+            else:
+                break
+        from services.user_service import CustomerService
+        success = CustomerService.change_customer_password(user.username, old_password, new_password)
+        if success:
+            print("Password changed successfully!.")
+        else:
+            print("Incorrect current password. Password change failed.")
 
 # Assign classes to globals for forward reference
 globals()['AdminUserController'] = AdminUserController
