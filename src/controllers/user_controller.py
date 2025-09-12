@@ -1,5 +1,7 @@
 from services.user_service import UserService
 import pwinput
+from controllers.car_controller import car_management_menu
+from controllers.rental_controller import rental_approval_menu, book_rental_menu, customer_booking_menu
 
 
 # Forward declarations for type hints
@@ -43,8 +45,6 @@ class AdminUserController(UserController):
 
     @staticmethod
     def admin_menu(username):
-        from controllers.car_controller import car_management_menu
-        from controllers.rental_controller import rental_approval_menu
         while True:
             print("\nAdmin Menu")
             print("1. Manage Cars")
@@ -129,7 +129,6 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_main_menu(user):
-        from controllers.rental_controller import book_rental_menu, customer_booking_menu
         while True:
             print(f"\nCustomer Menu - {user.username}")
             print("1. Book Rental")
