@@ -103,6 +103,12 @@ class CustomerUserController(UserController):
         print(txts.txt_customer_registration_header)
         username = input(txts.txt_choose_username).strip()
         while True:
+            email = input(txts.txt_enter_email).strip()
+            if not Utils.is_valid_email(email):
+                print(txts.txt_invalid_email)
+                continue
+            break
+        while True:
             password = pwinput.pwinput(txts.txt_enter_new_password).strip()
             confirm_password = pwinput.pwinput(txts.txt_confirm_new_password).strip()
             if password != confirm_password:
@@ -112,7 +118,6 @@ class CustomerUserController(UserController):
                 print(txts.txt_password_invalid)
                 continue
             break
-        email = input(txts.txt_enter_email).strip()
         success = UserService.register_user(username, password, email, 'customer')
         if success:
             print(txts.txt_registration_success)
@@ -123,7 +128,7 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_login():
-        print(txts.txt_customer_login_header)
+        print(txts.txt_customer_login)
         username = input(txts.txt_enter_username).strip()
         password = pwinput.pwinput(txts.txt_enter_password).strip()
         user = UserService.login_user(username, password)
