@@ -2,27 +2,29 @@ from email.mime.text import MIMEText
 from dao.user_dao import UserDAO
 from services.rental_service import RentalService
 from services.email_service import EmailService
+from utils.prompt_utils import RentalTexts as txts
+
 
 def rental_approval_menu():
-    print("\nPending Rental Requests:")
+    print(txts.pending_requests)
     pending = RentalService.get_pending_rentals()
     if not pending:
-        print("No pending rentals.")
+        print(txts.no_pending)
         return
     for rental in pending:
         print(f"ID: {rental[0]}, User ID: {rental[1]}, Car ID: {rental[2]}, Start: {rental[3]}, End: {rental[4]}, Fee: {rental[6]}, Status: {rental[5]}")
-    rental_id = input("Enter Rental ID to approve/reject (or press Enter to go back): ").strip()
+    rental_id = input(txts.rental_id_prompt).strip()
     if not rental_id:
         return
     try:
         rental_id = int(rental_id)
     except ValueError:
-        print("Invalid Rental ID.")
+        print(txts.invalid_rental_id)
         return
-    action = input("Approve or Reject? (a/r): ").strip().lower()
+    action = input(txts.approve_or_reject).strip().lower()
     rental = next((r for r in pending if r[0] == rental_id), None)
     if not rental:
-        print("Rental not found.")
+        print(txts.not_found)
         return
     user_email = UserDAO.get_user_email_by_id(rental[1])
     car_id = rental[2]
@@ -31,31 +33,29 @@ def rental_approval_menu():
     if action == 'a':
         success = RentalService.update_rental_status(rental_id, 'approved')
         if success:
-            print("Rental approved.")
+            print(txts.approved)
             if user_email:
                 amount = rental[6]
                 EmailService.send_approval_email(user_email, car_id, start_date, end_date, amount)
         else:
-            print("Failed to approve rental.")
+            print(txts.approve_fail)
     elif action == 'r':
         success = RentalService.update_rental_status(rental_id, 'rejected')
         if success:
-            print("Rental rejected.")
+            print(txts.rejected)
             if user_email:
                 EmailService.send_rejection_email(user_email, car_id, start_date, end_date)
         else:
-            print("Failed to reject rental.")
+            print(txts.reject_fail)
     else:
-        print("Invalid action.")
+        print(txts.invalid_action)
 
 def book_rental_menu(user):
-    print("\nEnter rental start date (YYYY-MM-DD): ")
-    start_date = input().strip()
-    print("Enter rental end date (YYYY-MM-DD): ")
-    end_date = input().strip()
+    start_date = input(txts.start_date_prompt).strip()
+    end_date = input(txts.end_date_prompt).strip()
     cars, car_status = RentalService.get_car_status_for_dates(start_date, end_date)
     available_cars = [car for car in cars if car_status.get(car[0], 'available') == 'available']
-    print("\nCars for selected dates:")
+    print(txts.cars_for_dates)
     for car in cars:
         status = car_status.get(car[0], 'available')
         if status == 'available':
@@ -71,72 +71,72 @@ def book_rental_menu(user):
             customer_friendly_status = f"UNAVAILABLE ({status})"
             print(f"ID: {car[0]}, {car[1]} {car[2]}, Year: {car[3]}, Mileage: {car[4]}, Type: {car[8]}, Rate: ${car[9]}/day, Min Days: {car[6]}, Max Days: {car[7]} - {customer_friendly_status}")
     if not available_cars:
-        print("No cars available for booking for the selected dates.")
+        print(txts.no_cars_available)
         return
-    car_id = input("Enter Car ID to book (only AVAILABLE): ").strip()
+    car_id = input(txts.car_id_prompt).strip()
     try:
         car_id = int(car_id)
     except ValueError:
-        print("Invalid Car ID.")
+        print(txts.invalid_car_id)
         return
     if car_id not in [car[0] for car in available_cars]:
-        print("Selected car is not available for booking.")
+        print(txts.not_available)
         return
     extra_charges = 0.0
     total_fee = RentalService.calculate_rental_fee(car_id, start_date, end_date, extra_charges)
-    print(f"Total rental fee: ${total_fee}")
-    confirm = input("Confirm booking? (yes/no): ").strip().lower()
+    print(txts.total_fee.format(fee=total_fee))
+    confirm = input(txts.confirm_booking).strip().lower()
     if confirm == 'yes':
         success = RentalService.book_rental(user_id=user.id, car_id=car_id, start_date=start_date, end_date=end_date, total_fee=total_fee)
         if success:
-            print("Rental booked successfully! Pending approval.")
+            print(txts.booked_success)
         else:
-            print("Failed to book rental.")
+            print(txts.booked_fail)
     else:
-        print("Booking cancelled.")
+        print(txts.booking_cancelled)
 
 def customer_booking_menu(user):
     while True:
-        print("\nBooking Management Menu")
-        print("1. View My Bookings")
-        print("2. Cancel a Booking")
-        print("3. Update a Booking")
-        print("4. Back to Customer Menu")
-        choice = input("Enter choice: ").strip()
+        print(txts.booking_menu)
+        print(txts.view_bookings)
+        print(txts.cancel_booking)
+        print(txts.update_booking)
+        print(txts.back_to_customer)
+        choice = input(txts.booking_choice).strip()
         if choice == '1':
             bookings = RentalService.get_bookings_for_user(user.id)
             if not bookings:
-                print("No bookings found.")
+                print(txts.no_bookings)
             else:
                 for booking in bookings:
                     print(f"ID: {booking[0]}, Car ID: {booking[2]}, Start: {booking[3]}, End: {booking[4]}, Fee: {booking[5]}, Status: {booking[6]}")
         elif choice == '2':
-            rental_id = input("Enter Booking ID to cancel: ").strip()
+            rental_id = input(txts.booking_id_cancel).strip()
             try:
                 rental_id = int(rental_id)
                 success = RentalService.cancel_booking(rental_id, user.id)
                 if success:
-                    print("Booking cancelled successfully.")
+                    print(txts.cancel_success)
                 else:
-                    print("Failed to cancel booking or booking not found.")
+                    print(txts.cancel_fail)
             except ValueError:
-                print("Invalid Booking ID.")
+                print(txts.invalid_booking_id)
         elif choice == '3':
-            rental_id = input("Enter Booking ID to update: ").strip()
+            rental_id = input(txts.booking_id_update).strip()
             try:
                 rental_id = int(rental_id)
-                start_date = input("Enter new start date (YYYY-MM-DD): ").strip()
-                end_date = input("Enter new end date (YYYY-MM-DD): ").strip()
-                car_id = input("Enter new Car ID (or press Enter to keep current): ").strip()
+                start_date = input(txts.new_start_date).strip()
+                end_date = input(txts.new_end_date).strip()
+                car_id = input(txts.new_car_id).strip()
                 car_id = int(car_id) if car_id else None
                 success = RentalService.update_booking(rental_id, user.id, start_date, end_date, car_id)
                 if success:
-                    print("Booking updated successfully.")
+                    print(txts.update_success)
                 else:
-                    print("Failed to update booking. Only pending bookings can be updated.")
+                    print(txts.update_fail)
             except ValueError:
-                print("Invalid input.")
+                print(txts.invalid_input)
         elif choice == '4':
             break
         else:
-            print("Invalid choice. Try again.")
+            print(txts.invalid_choice)

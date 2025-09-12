@@ -1,31 +1,33 @@
+
 from services.car_service import CarService
+from utils.prompt_utils import CarTexts as txts
 
 def car_management_menu():
     while True:
-        print("\nCar Management Menu")
-        print("1. Add New Car")
-        print("2. View All Cars")
-        print("3. Update Car")
-        print("4. Delete Car")
-        print("5. Back to Admin Menu")
-        choice = input("Enter choice: ").strip()
+        print(txts.menu_header)
+        print(txts.add_new_car)
+        print(txts.view_all_cars)
+        print(txts.update_car)
+        print(txts.delete_car)
+        print(txts.back_to_admin)
+        choice = input(txts.enter_choice).strip()
         if choice == '1':
-            print("\nAdd New Car")
-            make = input("Enter car make: ").strip()
-            model = input("Enter car model: ").strip()
-            year = int(input("Enter car year: ").strip())
-            mileage = int(input("Enter car mileage: ").strip())
-            min_rent = int(input("Enter minimum rental period (days): ").strip())
-            max_rent = int(input("Enter maximum rental period (days): ").strip())
-            print("\nSelect Car Type:")
-            print("1. Luxury")
-            print("2. Sedan")
-            print("3. SUV")
-            type_choice = input("Enter choice (1-3): ").strip()
+            print(txts.add_new_car_header)
+            make = input(txts.enter_make).strip()
+            model = input(txts.enter_model).strip()
+            year = int(input(txts.enter_year).strip())
+            mileage = int(input(txts.enter_mileage).strip())
+            min_rent = int(input(txts.enter_min_rent).strip())
+            max_rent = int(input(txts.enter_max_rent).strip())
+            print(txts.select_type)
+            print(txts.type_luxury)
+            print(txts.type_sedan)
+            print(txts.type_suv)
+            type_choice = input(txts.enter_type_choice).strip()
             car_types = {"1": "luxury", "2": "sedan", "3": "suv"}
             car_type = car_types.get(type_choice)
             if not car_type:
-                print("Invalid car type selected!")
+                print(txts.invalid_type)
                 continue
             success = CarService.add_car(
                 make=make,
@@ -38,64 +40,64 @@ def car_management_menu():
                 car_type=car_type
             )
             if success:
-                print("Car added successfully!")
+                print(txts.add_success)
             else:
-                print("Failed to add car. Please try again.")
+                print(txts.add_fail)
         elif choice == '2':
-            print("\nAll Cars:")
+            print(txts.all_cars_header)
             cars = CarService.get_available_cars()
             if not cars:
-                print("No cars found.")
+                print(txts.no_cars)
             else:
                 for car in cars:
-                    print(f"\nID: {car[0]}")
-                    print(f"Make: {car[1]}")
-                    print(f"Model: {car[2]}")
-                    print(f"Year: {car[3]}")
-                    print(f"Mileage: {car[4]}")
-                    print(f"Available: {'Yes' if car[5] else 'No'}")
-                    print(f"Rental Period: {car[6]}-{car[7]} days")
-                    print("-" * 30)
+                    print(f"\n{txts.id.format(id=car[0])}")
+                    print(f"{txts.make.format(make=car[1])}")
+                    print(f"{txts.model.format(model=car[2])}")
+                    print(f"{txts.year.format(year=car[3])}")
+                    print(f"{txts.mileage.format(mileage=car[4])}")
+                    print(f"{txts.available.format(available='Yes' if car[5] else 'No')}")
+                    print(f"{txts.rental_period.format(min=car[6], max=car[7])}")
+                    print(txts.separator)
         elif choice == '3':
-            car_id = input("\nEnter car ID to update: ").strip()
+            car_id = input(txts.enter_update_id).strip()
             try:
                 car_id = int(car_id)
-                print("Enter new values (leave blank to keep current value):")
+                print(txts.new_values)
                 updates = {}
-                make = input("Enter new make: ").strip()
+                make = input(txts.enter_new_make).strip()
                 if make: updates['make'] = make
-                model = input("Enter new model: ").strip()
+                model = input(txts.enter_new_model).strip()
                 if model: updates['model'] = model
-                year = input("Enter new year: ").strip()
+                year = input(txts.enter_new_year).strip()
                 if year: updates['year'] = int(year)
-                mileage = input("Enter new mileage: ").strip()
+                mileage = input(txts.enter_new_mileage).strip()
                 if mileage: updates['mileage'] = int(mileage)
-                available = input("Is car available? (1/0): ").strip()
+                available = input(txts.is_available).strip()
                 if available in ('0', '1'): updates['available_now'] = int(available)
                 if updates:
                     if CarService.update_car(car_id, **updates):
-                        print("Car updated successfully!")
+                        print(txts.update_success)
                     else:
-                        print("Failed to update car. Please try again.")
+                        print(txts.update_fail)
                 else:
-                    print("No updates provided.")
+                    print(txts.no_updates)
             except ValueError:
-                print("Invalid car ID.")
+                print(txts.invalid_id)
         elif choice == '4':
-            car_id = input("\nEnter car ID to delete: ").strip()
+            car_id = input(txts.enter_delete_id).strip()
             try:
                 car_id = int(car_id)
-                confirm = input(f"Are you sure you want to delete car {car_id}? (yes/no): ").strip().lower()
+                confirm = input(txts.confirm_delete.format(id=car_id)).strip().lower()
                 if confirm == 'yes':
                     if CarService.delete_car(car_id):
-                        print("Car deleted successfully!")
+                        print(txts.delete_success)
                     else:
-                        print("Failed to delete car. Please try again.")
+                        print(txts.delete_fail)
                 else:
-                    print("Deletion cancelled.")
+                    print(txts.delete_cancel)
             except ValueError:
-                print("Invalid car ID.")
+                print(txts.invalid_id)
         elif choice == '5':
             break
         else:
-            print("Invalid choice. Try again.")
+            print(txts.invalid_choice)

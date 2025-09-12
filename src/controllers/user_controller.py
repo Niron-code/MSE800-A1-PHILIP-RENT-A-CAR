@@ -1,10 +1,9 @@
-
 from services.user_service import UserService
 import pwinput
 from controllers.car_controller import car_management_menu
 from controllers.rental_controller import rental_approval_menu, book_rental_menu, customer_booking_menu
-from utils import Utils
-
+from utils.utils import Utils
+from utils.prompt_utils import UserTexts as txts
 
 # Forward declarations for type hints
 AdminUserController = None
@@ -13,137 +12,137 @@ CustomerUserController = None
 class UserController:
     @staticmethod
     def user_main_menu():
-        print("Welcome to Philip Rent-A-Car!")
-        print("Are you an Admin or Customer?")
-        print("1. Admin")
-        print("2. Customer")
-        print("0. Exit")
-        choice = input("Enter choice (1/2): ").strip()
+        print(txts.txt_welcome)
+        print(txts.txt_are_you_admin_or_customer)
+        print(txts.txt_admin_option)
+        print(txts.txt_customer_option)
+        print(txts.txt_exit_option)
+        choice = input(txts.txt_enter_choice_12).strip()
         if choice == '1':
             globals()['AdminUserController'].admin_login()
         elif choice == '2':
             globals()['CustomerUserController'].customer_menu()
         elif choice == '0':
-            print("Exiting...")
+            print(txts.txt_exiting)
             exit()
         else:
-            print("Invalid choice. Please try again.")
+            print(txts.txt_invalid_choice)
             UserController.user_main_menu()
 
 
 class AdminUserController(UserController):
     @staticmethod
     def admin_login():
-        print("\nAdmin Login")
-        username = input("Username: ").strip()
-        password = pwinput.pwinput("Password: ").strip()
+        print(txts.txt_admin_login)
+        username = input(txts.txt_enter_username).strip()
+        password = pwinput.pwinput(txts.txt_enter_password).strip()
         user = UserService.login_user(username, password)
         if user and user.role == 'admin':
-            print(f"Welcome, Admin {username}!")
+            print(txts.txt_welcome_admin.format(username=username))
             AdminUserController.admin_menu(username)
         else:
-            print("Invalid admin credentials.")
+            print(txts.txt_invalid_admin_credentials)
             UserController.user_main_menu()
 
     @staticmethod
     def admin_menu(username):
         while True:
-            print("\nAdmin Menu")
-            print("1. Manage Cars")
-            print("2. Approve/Reject Rentals")
-            print("3. Change Password")
-            print("4. Logout")
-            choice = input("Enter choice: ").strip()
+            print(txts.txt_admin_menu)
+            print(txts.txt_manage_cars)
+            print(txts.txt_approve_reject_rentals)
+            print(txts.txt_admin_change_password_option)
+            print(txts.txt_admin_logout_option)
+            choice = input(txts.txt_enter_choice).strip()
             if choice == '1':
                 car_management_menu()
             elif choice == '2':
                 rental_approval_menu()
             elif choice == '3':
-                old_pw = pwinput.pwinput("Enter current password: ").strip()
+                old_pw = pwinput.pwinput(txts.txt_enter_current_password).strip()
                 while True:
-                    new_pw = pwinput.pwinput("Enter new password: ").strip()
-                    confirm_pw = pwinput.pwinput("Confirm new password: ").strip()
+                    new_pw = pwinput.pwinput(txts.txt_enter_new_password).strip()
+                    confirm_pw = pwinput.pwinput(txts.txt_confirm_new_password).strip()
                     if new_pw != confirm_pw:
-                        print("Passwords do not match. Please try again.")
+                        print(txts.txt_passwords_do_not_match)
                         continue
                     if not Utils.is_valid_password(new_pw):
-                        print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                        print(txts.txt_password_invalid)
                         continue
                     break
                 from services.user_service import AdminService
                 success = AdminService.change_admin_password(username, old_pw, new_pw)
                 if success:
-                    print("Password changed successfully.")
+                    print(txts.txt_password_changed_success)
                 else:
-                    print("Incorrect current password.")
+                    print(txts.txt_incorrect_current_password)
             elif choice == '4':
-                print("Logging out...")
+                print(txts.txt_logging_out)
                 UserController.user_main_menu()
                 break
             else:
-                print("Invalid choice. Try again.")
+                print(txts.txt_invalid_choice)
 
 
 class CustomerUserController(UserController):
     @staticmethod
     def customer_menu():
-        print("\nAre you a new or existing customer?")
-        print("1. New Customer (Sign Up)")
-        print("2. Existing Customer (Login)")
-        choice = input("Enter choice (1/2): ").strip()
+        print(txts.txt_new_or_existing_customer)
+        print(txts.txt_new_customer_option)
+        print(txts.txt_existing_customer_option)
+        choice = input(txts.txt_enter_choice_12).strip()
         if choice == '1':
             CustomerUserController.customer_signup()
         elif choice == '2':
             CustomerUserController.customer_login()
         else:
-            print("Invalid choice. Please try again.")
+            print(txts.txt_invalid_choice)
             CustomerUserController.customer_menu()
 
     @staticmethod
     def customer_signup():
-        print("\nCustomer Registration")
-        username = input("Choose a username: ").strip()
+        print(txts.txt_customer_registration_header)
+        username = input(txts.txt_choose_username).strip()
         while True:
-            password = pwinput.pwinput("Choose a password: ").strip()
-            confirm_password = pwinput.pwinput("Confirm password: ").strip()
+            password = pwinput.pwinput(txts.txt_enter_new_password).strip()
+            confirm_password = pwinput.pwinput(txts.txt_confirm_new_password).strip()
             if password != confirm_password:
-                print("Passwords do not match. Please try again.")
+                print(txts.txt_passwords_do_not_match)
                 continue
             if not Utils.is_valid_password(password):
-                print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                print(txts.txt_password_invalid)
                 continue
             break
-        email = input("Enter your email: ").strip()
+        email = input(txts.txt_enter_email).strip()
         success = UserService.register_user(username, password, email, 'customer')
         if success:
-            print("Registration successful! Please login.")
+            print(txts.txt_registration_success)
             CustomerUserController.customer_login()
         else:
-            print("Username already exists. Try again.")
+            print(txts.txt_username_exists)
             CustomerUserController.customer_signup()
 
     @staticmethod
     def customer_login():
-        print("\nCustomer Login")
-        username = input("Username: ").strip()
-        password = pwinput.pwinput("Password: ").strip()
+        print(txts.txt_customer_login_header)
+        username = input(txts.txt_enter_username).strip()
+        password = pwinput.pwinput(txts.txt_enter_password).strip()
         user = UserService.login_user(username, password)
         if user and user.role == 'customer':
-            print(f"Welcome, {username}! Email: {user.email}")
+            print(txts.txt_welcome_customer.format(username=username, email=user.email))
             CustomerUserController.customer_main_menu(user)
         else:
-            print("Invalid customer credentials.")
+            print(txts.txt_invalid_customer_credentials)
             CustomerUserController.customer_menu()
 
     @staticmethod
     def customer_main_menu(user):
         while True:
-            print(f"\nCustomer Menu - {user.username}")
-            print("1. Book Rental")
-            print("2. Manage My Bookings")
-            print("3. Change Password")
-            print("4. Logout")
-            choice = input("Enter choice: ").strip()
+            print(txts.txt_customer_menu.format(username=user.username))
+            print(txts.txt_book_rental)
+            print(txts.txt_manage_bookings)
+            print(txts.txt_change_password_option)
+            print(txts.txt_logout_option)
+            choice = input(txts.txt_enter_choice).strip()
             if choice == '1':
                 book_rental_menu(user)
             elif choice == '2':
@@ -151,32 +150,32 @@ class CustomerUserController(UserController):
             elif choice == '3':
                 CustomerUserController.change_password(user)
             elif choice == '4':
-                print("Logging out...")
+                print(txts.txt_logging_out)
                 UserController.user_main_menu()
                 break
             else:
-                print("Invalid choice. Try again.")
+                print(txts.txt_invalid_choice)
 
     @staticmethod
     def change_password(user):
-        print("\nChange Password")
-        old_password = pwinput.pwinput("Enter current password: ").strip()
+        print(txts.txt_change_password_header)
+        old_password = pwinput.pwinput(txts.txt_enter_current_password).strip()
         while True:
-            new_password = pwinput.pwinput("Enter new password: ").strip()
-            confirm_password = pwinput.pwinput("Confirm new password: ").strip()
+            new_password = pwinput.pwinput(txts.txt_enter_new_password).strip()
+            confirm_password = pwinput.pwinput(txts.txt_confirm_new_password).strip()
             if new_password != confirm_password:
-                print("Passwords do not match. Please try again.")
+                print(txts.txt_passwords_do_not_match)
                 continue
             if not Utils.is_valid_password(new_password):
-                print("Password must be at least 8 characters, contain alphanumeric and symbol, and no consecutive repeating characters.")
+                print(txts.txt_password_invalid)
                 continue
             break
         from services.user_service import CustomerService
         success = CustomerService.change_customer_password(user.username, old_password, new_password)
         if success:
-            print("Password changed successfully!.")
+            print(txts.txt_password_changed_success)
         else:
-            print("Incorrect current password. Password change failed.")
+            print(txts.txt_password_change_failed)
 
 # Assign classes to globals for forward reference
 globals()['AdminUserController'] = AdminUserController
