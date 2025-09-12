@@ -1,9 +1,21 @@
+"""
+car.py
+
+Defines the Car model hierarchy for the car rental system.
+Includes abstract base class Car and concrete subclasses for different car types (Luxury, Sedan, SUV).
+Provides a CarFactory for creating car instances based on type.
+"""
+
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Optional
 
 @dataclass
 class Car(ABC):
+    """
+    Abstract base class for car objects in the rental system.
+    Defines common attributes and an abstract method for rate calculation.
+    """
     make: str
     model: str
     year: int
@@ -16,11 +28,17 @@ class Car(ABC):
 
     @abstractmethod
     def calculate_rate(self, days: int) -> float:
-        """Calculate the rental rate for the given number of days"""
+        """
+        Calculate the rental rate for the given number of days.
+        Must be implemented by subclasses.
+        """
         pass
 
 @dataclass
 class LuxuryCar(Car):
+    """
+    Concrete Car subclass for luxury cars with higher rates and custom rate logic.
+    """
     def __init__(self, make: str, model: str, year: int, mileage: int, 
                  available_now: int, min_rent_period: int, max_rent_period: int):
         super().__init__(
@@ -31,12 +49,17 @@ class LuxuryCar(Car):
         )
     
     def calculate_rate(self, days: int) -> float:
-        # Luxury cars get more expensive for shorter rentals
+        """
+        Calculate rate for luxury cars. More expensive for shorter rentals.
+        """
         rate_multiplier = 1.5 if days < 7 else 1.2
         return self.base_rate_per_day * days * rate_multiplier
 
 @dataclass
 class SedanCar(Car):
+    """
+    Concrete Car subclass for sedan cars with standard rates and custom rate logic.
+    """
     def __init__(self, make: str, model: str, year: int, mileage: int, 
                  available_now: int, min_rent_period: int, max_rent_period: int):
         super().__init__(
@@ -47,12 +70,17 @@ class SedanCar(Car):
         )
     
     def calculate_rate(self, days: int) -> float:
-        # Sedans get cheaper for longer rentals
+        """
+        Calculate rate for sedans. Cheaper for longer rentals.
+        """
         rate_multiplier = 0.9 if days > 7 else 1.0
         return self.base_rate_per_day * days * rate_multiplier
 
 @dataclass
 class SUVCar(Car):
+    """
+    Concrete Car subclass for SUV cars with balanced rates and custom rate logic.
+    """
     def __init__(self, make: str, model: str, year: int, mileage: int, 
                  available_now: int, min_rent_period: int, max_rent_period: int):
         super().__init__(
@@ -63,16 +91,22 @@ class SUVCar(Car):
         )
     
     def calculate_rate(self, days: int) -> float:
-        # SUVs have a balanced rate structure
+        """
+        Calculate rate for SUVs. Balanced rate structure.
+        """
         rate_multiplier = 1.2 if days < 3 else (0.9 if days > 7 else 1.0)
         return self.base_rate_per_day * days * rate_multiplier
 
 class CarFactory:
+    """
+    Factory class for creating car instances based on car_type string.
+    """
     @staticmethod
     def create_car(car_type: str, make: str, model: str, year: int, mileage: int,
                    available_now: int, min_rent_period: int, max_rent_period: int) -> Optional[Car]:
         """
-        Create a car of the specified type
+        Create a car of the specified type (luxury, sedan, suv).
+        Returns an instance of the appropriate Car subclass or None if type is invalid.
         """
         car_types = {
             "luxury": LuxuryCar,

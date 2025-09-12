@@ -1,7 +1,10 @@
-import sqlite3
-from datetime import datetime
-from typing import List, Tuple
-from database import get_connection
+"""
+rental.py
+
+Defines the Rental model for the car rental system.
+Represents a rental transaction between a user and a car, including dates, fee, and status.
+"""
+
 from dataclasses import dataclass
 
 @dataclass
