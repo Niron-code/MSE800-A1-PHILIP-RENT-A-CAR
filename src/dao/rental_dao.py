@@ -7,8 +7,8 @@ Relies on the Rental and Car models and database connection utility.
 """
 
 from models.rental import Rental
-from database import get_connection
-from typing import List, Optional, Tuple
+from database import Database
+from typing import List,  Tuple
 from datetime import datetime
 from models.car import CarFactory
 
@@ -22,7 +22,7 @@ class RentalDAO:
         Inserts a new rental record into the database.
         Returns True if the operation is successful.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO rentals (user_id, car_id, start_date, end_date, total_fee, status)
@@ -38,7 +38,7 @@ class RentalDAO:
         Calculates the total rental fee for a car between two dates, including any extra charges.
         Returns the calculated fee as a float.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day FROM cars WHERE id=?', (car_id,))
         car_row = cursor.fetchone()
@@ -74,7 +74,7 @@ class RentalDAO:
         Retrieves all pending rental requests from the database.
         Returns a list of rental records as tuples.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM rentals WHERE status="pending"')
         rentals = cursor.fetchall()
@@ -87,7 +87,7 @@ class RentalDAO:
         Updates the status of a rental record by rental_id.
         Returns True if the operation is successful.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('UPDATE rentals SET status=? WHERE id=?', (status, rental_id))
         conn.commit()
@@ -100,7 +100,7 @@ class RentalDAO:
         Retrieves all cars and their booking status for the given date range.
         Returns a tuple of (cars, car_status_dict).
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM cars')
         cars = cursor.fetchall()
@@ -126,7 +126,7 @@ class RentalDAO:
         Cancels a booking if it belongs to the user and is not already cancelled.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
         result = cursor.fetchone()
@@ -144,7 +144,7 @@ class RentalDAO:
         Updates booking dates or car if booking belongs to user and is pending.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
         result = cursor.fetchone()
@@ -164,7 +164,7 @@ class RentalDAO:
         """
         Returns all bookings for a given user as a list of tuples.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM rentals WHERE user_id=?', (user_id,))
         bookings = cursor.fetchall()

@@ -7,7 +7,7 @@ Relies on the User model, bcrypt for password hashing, and database connection u
 """
 
 from models.user import User, UserFactory
-from database import get_connection
+from database import Database
 from typing import Optional
 import bcrypt
 
@@ -21,7 +21,7 @@ class UserDAO:
         Authenticates a user by username and password.
         Returns user details tuple if successful, None otherwise.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT id, username, password, email, role FROM users WHERE username=?', (username,))
         result = cursor.fetchone()
@@ -38,7 +38,7 @@ class UserDAO:
         Changes the password for a user if the old password matches.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT password FROM users WHERE username=? AND role=?', (username, role))
         result = cursor.fetchone()
@@ -57,7 +57,7 @@ class UserDAO:
         Registers a new user in the database.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         try:
             hashed_pw = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -75,7 +75,7 @@ class UserDAO:
         Retrieves a User object by username and password if credentials are valid.
         Returns a User instance or None.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT id, username, password, role FROM users WHERE username=?', (username,))
         result = cursor.fetchone()
@@ -92,7 +92,7 @@ class UserDAO:
         Retrieves the email address for a user by user_id.
         Returns the email as a string or None if not found.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT email FROM users WHERE id=?', (user_id,))
         result = cursor.fetchone()

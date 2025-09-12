@@ -7,8 +7,8 @@ Relies on the Car model and database connection utility.
 """
 
 from models.car import Car
-from database import get_connection
-from typing import List, Optional, Tuple
+from database import Database
+from typing import List,  Tuple
 
 class CarDAO:
     """
@@ -20,7 +20,7 @@ class CarDAO:
         Inserts a new car record into the database.
         Returns True if the operation is successful.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO cars (
@@ -41,7 +41,7 @@ class CarDAO:
         Accepts keyword arguments for fields to update.
         Returns True if the operation is successful.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         fields = ', '.join([f"{k}=?" for k in kwargs.keys()])
         values = list(kwargs.values())
@@ -57,7 +57,7 @@ class CarDAO:
         Deletes a car record from the database by car_id.
         Returns True if the operation is successful.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('DELETE FROM cars WHERE id=?', (car_id,))
         conn.commit()
@@ -70,7 +70,7 @@ class CarDAO:
         Retrieves all available cars from the database (where available_now=1).
         Returns a list of car records as tuples.
         """
-        conn = get_connection()
+        conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM cars WHERE available_now=1')
         cars = cursor.fetchall()

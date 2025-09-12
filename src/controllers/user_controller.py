@@ -8,8 +8,8 @@ Relies on UserService and related services for business logic and data operation
 
 from services.user_service import UserService
 import pwinput
-from controllers.car_controller import car_management_menu
-from controllers.rental_controller import rental_approval_menu, book_rental_menu, customer_booking_menu
+from controllers.car_controller import CarController
+from controllers.rental_controller import RentalController
 from utils.utils import Utils
 from utils.text_utils import UserTexts as txts
 
@@ -74,9 +74,9 @@ class AdminUserController(UserController):
             print(txts.txt_admin_logout_option)
             choice = input(txts.txt_enter_choice).strip()
             if choice == '1':
-                car_management_menu()
+                CarController.management_menu()
             elif choice == '2':
-                rental_approval_menu()
+                RentalController.rental_approval_menu()
             elif choice == '3':
                 old_pw = pwinput.pwinput(txts.txt_enter_current_password).strip()
                 while True:
@@ -185,9 +185,9 @@ class CustomerUserController(UserController):
             print(txts.txt_logout_option)
             choice = input(txts.txt_enter_choice).strip()
             if choice == '1':
-                book_rental_menu(user)
+                RentalController.book_rental_menu(user)
             elif choice == '2':
-                customer_booking_menu(user)
+                RentalController.customer_booking_menu(user)
             elif choice == '3':
                 CustomerUserController.change_password(user)
             elif choice == '4':

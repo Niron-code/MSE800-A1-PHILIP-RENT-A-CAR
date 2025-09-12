@@ -6,9 +6,9 @@ Initializes the database and launches the main user interface menu.
 """
 
 from controllers.user_controller import UserController
-from database import init_db
-
-init_db()
+from database import Database
+# Initialize the database
+Database.init_db()
 
 def main():
     """
