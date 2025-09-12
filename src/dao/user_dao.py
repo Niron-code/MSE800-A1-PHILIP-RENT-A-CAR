@@ -1,12 +1,26 @@
+"""
+user_dao.py
+
+Data Access Object (DAO) module for user-related database operations.
+Provides methods for user authentication, registration, password management, and email retrieval.
+Relies on the User model, bcrypt for password hashing, and database connection utility.
+"""
+
 from models.user import User, UserFactory
 from database import get_connection
 from typing import Optional
 import bcrypt
 
 class UserDAO:
-
+    """
+    DAO class for performing CRUD operations and authentication on user records in the database.
+    """
     @staticmethod
     def login_user(username: str, password: str):
+        """
+        Authenticates a user by username and password.
+        Returns user details tuple if successful, None otherwise.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT id, username, password, email, role FROM users WHERE username=?', (username,))
@@ -20,6 +34,10 @@ class UserDAO:
     
     @staticmethod
     def change_user_password(username: str, old_password: str, new_password: str, role: str) -> bool:
+        """
+        Changes the password for a user if the old password matches.
+        Returns True if the operation is successful, False otherwise.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT password FROM users WHERE username=? AND role=?', (username, role))
@@ -35,6 +53,10 @@ class UserDAO:
     
     @staticmethod
     def register_user(user: User) -> bool:
+        """
+        Registers a new user in the database.
+        Returns True if the operation is successful, False otherwise.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         try:
@@ -49,6 +71,10 @@ class UserDAO:
 
     @staticmethod
     def get_user_by_credentials(username: str, password: str) -> Optional[User]:
+        """
+        Retrieves a User object by username and password if credentials are valid.
+        Returns a User instance or None.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT id, username, password, role FROM users WHERE username=?', (username,))
@@ -60,9 +86,12 @@ class UserDAO:
                 return UserFactory.create_user(id, username_db, hashed_pw, role)
         return None
 
-
     @staticmethod
     def get_user_email_by_id(user_id: int) -> Optional[str]:
+        """
+        Retrieves the email address for a user by user_id.
+        Returns the email as a string or None if not found.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT email FROM users WHERE id=?', (user_id,))

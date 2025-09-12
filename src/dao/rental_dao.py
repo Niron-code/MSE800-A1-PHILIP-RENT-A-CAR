@@ -1,3 +1,11 @@
+"""
+rental_dao.py
+
+Data Access Object (DAO) module for rental-related database operations.
+Provides methods to book rentals, calculate fees, update statuses, and manage bookings.
+Relies on the Rental and Car models and database connection utility.
+"""
+
 from models.rental import Rental
 from database import get_connection
 from typing import List, Optional, Tuple
@@ -5,8 +13,15 @@ from datetime import datetime
 from models.car import CarFactory
 
 class RentalDAO:
+    """
+    DAO class for performing CRUD operations and business logic on rental records in the database.
+    """
     @staticmethod
     def book_rental(rental: Rental) -> bool:
+        """
+        Inserts a new rental record into the database.
+        Returns True if the operation is successful.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('''
@@ -19,6 +34,10 @@ class RentalDAO:
 
     @staticmethod
     def calculate_rental_fee(car_id: int, start_date: str, end_date: str, extra_charges: float = 0.0) -> float:
+        """
+        Calculates the total rental fee for a car between two dates, including any extra charges.
+        Returns the calculated fee as a float.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day FROM cars WHERE id=?', (car_id,))
@@ -51,6 +70,10 @@ class RentalDAO:
 
     @staticmethod
     def get_pending_rentals() -> List[Tuple]:
+        """
+        Retrieves all pending rental requests from the database.
+        Returns a list of rental records as tuples.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM rentals WHERE status="pending"')
@@ -60,6 +83,10 @@ class RentalDAO:
 
     @staticmethod
     def update_rental_status(rental_id: int, status: str) -> bool:
+        """
+        Updates the status of a rental record by rental_id.
+        Returns True if the operation is successful.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('UPDATE rentals SET status=? WHERE id=?', (status, rental_id))
@@ -69,6 +96,10 @@ class RentalDAO:
 
     @staticmethod
     def get_car_status_for_dates(start_date, end_date):
+        """
+        Retrieves all cars and their booking status for the given date range.
+        Returns a tuple of (cars, car_status_dict).
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM cars')
@@ -91,7 +122,10 @@ class RentalDAO:
 
     @staticmethod
     def cancel_booking(rental_id: int, user_id: int) -> bool:
-        """Cancel a booking if it belongs to the user and is not already cancelled."""
+        """
+        Cancels a booking if it belongs to the user and is not already cancelled.
+        Returns True if the operation is successful, False otherwise.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
@@ -106,7 +140,10 @@ class RentalDAO:
 
     @staticmethod
     def update_booking(rental_id: int, user_id: int, start_date: str, end_date: str, car_id: int = None) -> bool:
-        """Update booking dates or car if booking belongs to user and is pending."""
+        """
+        Updates booking dates or car if booking belongs to user and is pending.
+        Returns True if the operation is successful, False otherwise.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
@@ -124,7 +161,9 @@ class RentalDAO:
 
     @staticmethod
     def get_bookings_for_user(user_id: int) -> List[Tuple]:
-        """Return all bookings for a given user."""
+        """
+        Returns all bookings for a given user as a list of tuples.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM rentals WHERE user_id=?', (user_id,))

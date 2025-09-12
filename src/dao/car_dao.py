@@ -1,10 +1,25 @@
+"""
+car_dao.py
+
+Data Access Object (DAO) module for car-related database operations.
+Provides methods to add, update, delete, and retrieve car records from the database.
+Relies on the Car model and database connection utility.
+"""
+
 from models.car import Car
 from database import get_connection
 from typing import List, Optional, Tuple
 
 class CarDAO:
+    """
+    DAO class for performing CRUD operations on car records in the database.
+    """
     @staticmethod
     def add_car(car: Car) -> bool:
+        """
+        Inserts a new car record into the database.
+        Returns True if the operation is successful.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('''
@@ -21,6 +36,11 @@ class CarDAO:
 
     @staticmethod
     def update_car(car_id: int, **kwargs) -> bool:
+        """
+        Updates fields of an existing car record by car_id.
+        Accepts keyword arguments for fields to update.
+        Returns True if the operation is successful.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         fields = ', '.join([f"{k}=?" for k in kwargs.keys()])
@@ -33,6 +53,10 @@ class CarDAO:
 
     @staticmethod
     def delete_car(car_id: int) -> bool:
+        """
+        Deletes a car record from the database by car_id.
+        Returns True if the operation is successful.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('DELETE FROM cars WHERE id=?', (car_id,))
@@ -42,6 +66,10 @@ class CarDAO:
 
     @staticmethod
     def get_available_cars() -> List[Tuple]:
+        """
+        Retrieves all available cars from the database (where available_now=1).
+        Returns a list of car records as tuples.
+        """
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM cars WHERE available_now=1')
