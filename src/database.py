@@ -1,11 +1,25 @@
+"""
+database.py
+
+Handles SQLite database connection and schema initialization for the car rental system.
+Defines functions to get a database connection and initialize tables for users, cars, and rentals.
+"""
+
 import sqlite3
 
 DB_NAME = 'car_rental_v1.db'
 
 def get_connection():
+    """
+    Returns a new SQLite database connection using the configured database name.
+    """
     return sqlite3.connect(DB_NAME)
 
 def init_db():
+    """
+    Initializes the database schema for users, cars, and rentals tables.
+    Creates tables if they do not exist and inserts default admin and car records.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     # Users table
