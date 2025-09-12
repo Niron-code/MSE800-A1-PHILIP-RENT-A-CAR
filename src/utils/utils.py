@@ -1,8 +1,18 @@
+"""
+utils.py
+
+Utility module for the car rental system.
+Provides validation functions for passwords, emails, and rental dates.
+"""
+
 import datetime
 import re
 
 
 class Utils:
+	"""
+	Utility class containing static methods for input validation and date checks.
+	"""
 	@staticmethod
 	def is_valid_password(password: str) -> bool:
 		"""
@@ -10,6 +20,7 @@ class Utils:
 		1. At least 8 characters long
 		2. Contains both alphanumeric characters and symbols
 		3. No single character repeats consecutively
+		Returns True if valid, False otherwise.
 		"""
 		if len(password) < 8:
 			return False

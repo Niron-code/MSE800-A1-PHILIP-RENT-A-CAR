@@ -1,4 +1,14 @@
+"""
+text_utils.py
+
+Contains centralized user-facing prompt and message classes for the car rental system.
+Classes group related text constants for rentals, cars, and users to ensure consistency and maintainability.
+"""
+
 class RentalTexts:
+    """
+    Contains all prompts and messages related to rental operations.
+    """
     pending_requests = "\nPending Rental Requests:"
     no_pending = "No pending rentals."
     rental_id_prompt = "Enter Rental ID to approve/reject (or press Enter to go back): "
@@ -45,6 +55,9 @@ class RentalTexts:
     end_date_invalid = "End date must be in the future and not before start date."
 
 class CarTexts:
+    """
+    Contains all prompts and messages related to car management operations.
+    """
     menu_header = "\nCar Management Menu"
     add_new_car = "1. Add New Car"
     view_all_cars = "2. View All Cars"
@@ -95,6 +108,9 @@ class CarTexts:
     delete_cancel = "Deletion cancelled."
 
 class UserTexts:
+    """
+    Contains all prompts and messages related to user registration, login, and menu navigation.
+    """
     txt_admin_option = "1. Admin"
     txt_customer_option = "2. Customer"
     txt_exit_option = "0. Exit"
