@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dao package &#8212; Philip Rent-A-Car 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="database module" href="database.html" />
+    <link rel="prev" title="controllers package" href="controllers.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dao-package">
+<h1>dao package<a class="headerlink" href="#dao-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-dao.car_dao">
+<span id="dao-car-dao-module"></span><h2>dao.car_dao module<a class="headerlink" href="#module-dao.car_dao" title="Link to this heading">¶</a></h2>
+<p>car_dao.py</p>
+<p>Data Access Object (DAO) module for car-related database operations.
+Provides methods to add, update, delete, and retrieve car records from the database.
+Relies on the Car model and database connection utility.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dao.car_dao.</span></span><span class="sig-name descname"><span class="pre">CarDAO</span></span><a class="headerlink" href="#dao.car_dao.CarDAO" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DAO class for performing CRUD operations on car records in the database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO.add_car">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="models.html#models.car.Car" title="models.car.Car"><span class="pre">Car</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.add_car" title="Link to this definition">¶</a></dt>
+<dd><p>Inserts a new car record into the database.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO.delete_car">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.delete_car" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes a car record from the database by car_id.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO.get_available_cars">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_available_cars</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.get_available_cars" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves all available cars from the database (where available_now=1).
+Returns a list of car records as tuples.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO.update_car">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.update_car" title="Link to this definition">¶</a></dt>
+<dd><p>Updates fields of an existing car record by car_id.
+Accepts keyword arguments for fields to update.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dao.rental_dao">
+<span id="dao-rental-dao-module"></span><h2>dao.rental_dao module<a class="headerlink" href="#module-dao.rental_dao" title="Link to this heading">¶</a></h2>
+<p>rental_dao.py</p>
+<p>Data Access Object (DAO) module for rental-related database operations.
+Provides methods to book rentals, calculate fees, update statuses, and manage bookings.
+Relies on the Rental and Car models and database connection utility.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dao.rental_dao.</span></span><span class="sig-name descname"><span class="pre">RentalDAO</span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DAO class for performing CRUD operations and business logic on rental records in the database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.book_rental">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">book_rental</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="models.html#models.rental.Rental" title="models.rental.Rental"><span class="pre">Rental</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.book_rental" title="Link to this definition">¶</a></dt>
+<dd><p>Inserts a new rental record into the database.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.calculate_rental_fee">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_rental_fee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_charges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.calculate_rental_fee" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates the total rental fee for a car between two dates, including any extra charges.
+Returns the calculated fee as a float.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.cancel_booking">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cancel_booking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.cancel_booking" title="Link to this definition">¶</a></dt>
+<dd><p>Cancels a booking if it belongs to the user and is not already cancelled.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.get_bookings_for_user">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_bookings_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.get_bookings_for_user" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all bookings for a given user as a list of tuples.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.get_car_status_for_dates">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_car_status_for_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dao.rental_dao.RentalDAO.get_car_status_for_dates" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves all cars and their booking status for the given date range.
+Returns a tuple of (cars, car_status_dict).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.get_pending_rentals">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_pending_rentals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.get_pending_rentals" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves all pending rental requests from the database.
+Returns a list of rental records as tuples.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.update_booking">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_booking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.update_booking" title="Link to this definition">¶</a></dt>
+<dd><p>Updates booking dates or car if booking belongs to user and is pending.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.rental_dao.RentalDAO.update_rental_status">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_rental_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.rental_dao.RentalDAO.update_rental_status" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the status of a rental record by rental_id.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dao.user_dao">
+<span id="dao-user-dao-module"></span><h2>dao.user_dao module<a class="headerlink" href="#module-dao.user_dao" title="Link to this heading">¶</a></h2>
+<p>user_dao.py</p>
+<p>Data Access Object (DAO) module for user-related database operations.
+Provides methods for user authentication, registration, password management, and email retrieval.
+Relies on the User model, bcrypt for password hashing, and database connection utility.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dao.user_dao.</span></span><span class="sig-name descname"><span class="pre">UserDAO</span></span><a class="headerlink" href="#dao.user_dao.UserDAO" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DAO class for performing CRUD operations and authentication on user records in the database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO.change_user_password">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_user_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.user_dao.UserDAO.change_user_password" title="Link to this definition">¶</a></dt>
+<dd><p>Changes the password for a user if the old password matches.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO.get_user_by_credentials">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_credentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="models.html#models.user.User" title="models.user.User"><span class="pre">User</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#dao.user_dao.UserDAO.get_user_by_credentials" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a User object by username and password if credentials are valid.
+Returns a User instance or None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO.get_user_email_by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_email_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#dao.user_dao.UserDAO.get_user_email_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the email address for a user by user_id.
+Returns the email as a string or None if not found.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO.login_user">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dao.user_dao.UserDAO.login_user" title="Link to this definition">¶</a></dt>
+<dd><p>Authenticates a user by username and password.
+Returns user details tuple if successful, None otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dao.user_dao.UserDAO.register_user">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">register_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="models.html#models.user.User" title="models.user.User"><span class="pre">User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.user_dao.UserDAO.register_user" title="Link to this definition">¶</a></dt>
+<dd><p>Registers a new user in the database.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dao">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dao" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Philip Rent-A-Car</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">controllers package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dao package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">database module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">services package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="controllers.html" title="previous chapter">controllers package</a></li>
+      <li>Next: <a href="database.html" title="next chapter">database module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Philip Niron Nithianandan.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/dao.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
