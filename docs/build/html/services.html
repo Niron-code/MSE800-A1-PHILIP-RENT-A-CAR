@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>services package &#8212; Philip Rent-A-Car 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utils package" href="utils.html" />
+    <link rel="prev" title="models package" href="models.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="services-package">
+<h1>services package<a class="headerlink" href="#services-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-services.car_service">
+<span id="services-car-service-module"></span><h2>services.car_service module<a class="headerlink" href="#module-services.car_service" title="Link to this heading">¶</a></h2>
+<p>car_service.py</p>
+<p>Service layer for car-related business logic in the car rental system.
+Provides methods to add, update, delete, and retrieve cars by interacting with the DAO and model layers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="services.car_service.CarService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.car_service.</span></span><span class="sig-name descname"><span class="pre">CarService</span></span><a class="headerlink" href="#services.car_service.CarService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service class for car management operations.
+Handles business logic and delegates database operations to CarDAO.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="services.car_service.CarService.add_car">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">make</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mileage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">available_now</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_rent_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rent_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.car_service.CarService.add_car" title="Link to this definition">¶</a></dt>
+<dd><p>Add a new car to the database.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.car_service.CarService.delete_car">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.car_service.CarService.delete_car" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a car from the database by car_id.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.car_service.CarService.get_available_cars">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_available_cars</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#services.car_service.CarService.get_available_cars" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of available cars from the database.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.car_service.CarService.update_car">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.car_service.CarService.update_car" title="Link to this definition">¶</a></dt>
+<dd><p>Update car details by car_id.
+Accepts keyword arguments for fields to update.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-services.email_service">
+<span id="services-email-service-module"></span><h2>services.email_service module<a class="headerlink" href="#module-services.email_service" title="Link to this heading">¶</a></h2>
+<p>email_service.py</p>
+<p>Service layer for sending email notifications in the car rental system.
+Provides methods to send approval and rejection emails to customers using SMTP.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="services.email_service.EmailService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.email_service.</span></span><span class="sig-name descname"><span class="pre">EmailService</span></span><a class="headerlink" href="#services.email_service.EmailService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service class for handling email notifications.
+Uses SMTP to send emails for booking approvals and rejections.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="services.email_service.EmailService.SENDER_EMAIL">
+<span class="sig-name descname"><span class="pre">SENDER_EMAIL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'philip.car.rental&#64;gmail.com'</span></em><a class="headerlink" href="#services.email_service.EmailService.SENDER_EMAIL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="services.email_service.EmailService.SENDER_PASSWORD">
+<span class="sig-name descname"><span class="pre">SENDER_PASSWORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rgbw</span> <span class="pre">mikh</span> <span class="pre">hbvp</span> <span class="pre">wrrd'</span></em><a class="headerlink" href="#services.email_service.EmailService.SENDER_PASSWORD" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="services.email_service.EmailService.SMTP_PORT">
+<span class="sig-name descname"><span class="pre">SMTP_PORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">587</span></em><a class="headerlink" href="#services.email_service.EmailService.SMTP_PORT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="services.email_service.EmailService.SMTP_SERVER">
+<span class="sig-name descname"><span class="pre">SMTP_SERVER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'smtp.gmail.com'</span></em><a class="headerlink" href="#services.email_service.EmailService.SMTP_SERVER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.email_service.EmailService.send_approval_email">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_approval_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_approval_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send an approval email to the customer for a successful car rental booking.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.email_service.EmailService.send_email">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a generic email with the given subject and body to the specified recipient.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.email_service.EmailService.send_rejection_email">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_rejection_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_rejection_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a rejection email to the customer for a declined car rental booking.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-services.rental_service">
+<span id="services-rental-service-module"></span><h2>services.rental_service module<a class="headerlink" href="#module-services.rental_service" title="Link to this heading">¶</a></h2>
+<p>rental_service.py</p>
+<p>Service layer for rental-related business logic in the car rental system.
+Provides methods to book rentals, calculate fees, update statuses, and manage bookings by interacting with the DAO and model layers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="services.rental_service.RentalService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.rental_service.</span></span><span class="sig-name descname"><span class="pre">RentalService</span></span><a class="headerlink" href="#services.rental_service.RentalService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service class for rental management operations.
+Handles business logic and delegates database operations to RentalDAO.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.book_rental">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">book_rental</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_fee</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.rental_service.RentalService.book_rental" title="Link to this definition">¶</a></dt>
+<dd><p>Book a rental for a car.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.calculate_rental_fee">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_rental_fee</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_charges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#services.rental_service.RentalService.calculate_rental_fee" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the rental fee for a car between two dates, including any extra charges.
+Returns the calculated fee as a float.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.cancel_booking">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cancel_booking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.rental_service.RentalService.cancel_booking" title="Link to this definition">¶</a></dt>
+<dd><p>Cancel a booking for a user by rental_id.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.get_available_cars_for_specific_dates">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_available_cars_for_specific_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.rental_service.RentalService.get_available_cars_for_specific_dates" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of available cars for specific dates.
+Returns a list of car records.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.get_bookings_for_user">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_bookings_for_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.rental_service.RentalService.get_bookings_for_user" title="Link to this definition">¶</a></dt>
+<dd><p>Get all bookings for a user by user_id.
+Returns a list of booking records.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.get_car_status_for_dates">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_car_status_for_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.rental_service.RentalService.get_car_status_for_dates" title="Link to this definition">¶</a></dt>
+<dd><p>Get the status of cars for specific dates.
+Returns a tuple of (cars, car_status_dict).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.get_pending_rentals">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_pending_rentals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#services.rental_service.RentalService.get_pending_rentals" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of pending rental requests from the database.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.update_booking">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_booking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.rental_service.RentalService.update_booking" title="Link to this definition">¶</a></dt>
+<dd><p>Update a booking for a user (dates or car).
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.rental_service.RentalService.update_rental_status">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_rental_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rental_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.rental_service.RentalService.update_rental_status" title="Link to this definition">¶</a></dt>
+<dd><p>Update the status of a rental (approve/reject) by rental_id.
+Returns True if the operation is successful.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-services.user_service">
+<span id="services-user-service-module"></span><h2>services.user_service module<a class="headerlink" href="#module-services.user_service" title="Link to this heading">¶</a></h2>
+<p>user_service.py</p>
+<p>Service layer for user-related business logic in the car rental system.
+Provides methods for user registration, authentication, and password management by interacting with the DAO and model layers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="services.user_service.AdminService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_service.</span></span><span class="sig-name descname"><span class="pre">AdminService</span></span><a class="headerlink" href="#services.user_service.AdminService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#services.user_service.UserService" title="services.user_service.UserService"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserService</span></code></a></p>
+<p>Service class for admin-specific operations.
+Inherits from UserService and adds admin password management.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="services.user_service.AdminService.change_admin_password">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_admin_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.user_service.AdminService.change_admin_password" title="Link to this definition">¶</a></dt>
+<dd><p>Change admin password after verifying the old password.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="services.user_service.CustomerService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_service.</span></span><span class="sig-name descname"><span class="pre">CustomerService</span></span><a class="headerlink" href="#services.user_service.CustomerService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#services.user_service.UserService" title="services.user_service.UserService"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserService</span></code></a></p>
+<p>Service class for customer-specific operations.
+Inherits from UserService and adds customer password management and registration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="services.user_service.CustomerService.change_customer_password">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_customer_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.user_service.CustomerService.change_customer_password" title="Link to this definition">¶</a></dt>
+<dd><p>Change customer password after verifying the old password.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.user_service.CustomerService.register_customer">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">register_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.user_service.CustomerService.register_customer" title="Link to this definition">¶</a></dt>
+<dd><p>Register a new customer.
+Returns True if the operation is successful, False otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="services.user_service.UserService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">services.user_service.</span></span><span class="sig-name descname"><span class="pre">UserService</span></span><a class="headerlink" href="#services.user_service.UserService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service class for user management operations.
+Handles registration and authentication, delegating database operations to UserDAO.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="services.user_service.UserService.login_user">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.user_service.UserService.login_user" title="Link to this definition">¶</a></dt>
+<dd><p>Login a user and return the appropriate User object (AdminUser, CustomerUser, or User) using UserFactory.
+Returns a User instance or None if authentication fails.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="services.user_service.UserService.register_user">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">register_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#services.user_service.UserService.register_user" title="Link to this definition">¶</a></dt>
+<dd><p>Register a new user. Returns True if successful, False if username exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-services">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-services" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Philip Rent-A-Car</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">controllers package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dao.html">dao package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">database module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">services package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">models package</a></li>
+      <li>Next: <a href="utils.html" title="next chapter">utils package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Philip Niron Nithianandan.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/services.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

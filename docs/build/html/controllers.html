@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>controllers package &#8212; Philip Rent-A-Car 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dao package" href="dao.html" />
+    <link rel="prev" title="src" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="controllers-package">
+<h1>controllers package<a class="headerlink" href="#controllers-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-controllers.car_controller">
+<span id="controllers-car-controller-module"></span><h2>controllers.car_controller module<a class="headerlink" href="#module-controllers.car_controller" title="Link to this heading">¶</a></h2>
+<p>car_controller.py</p>
+<p>Controller module for car management operations in the car rental system.
+Handles user interaction for adding, viewing, updating, and deleting cars.
+Relies on CarService for business logic and database operations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.car_controller.CarController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.car_controller.</span></span><span class="sig-name descname"><span class="pre">CarController</span></span><a class="headerlink" href="#controllers.car_controller.CarController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Controller class for car management operations in the car rental system.
+Provides static methods to interact with the car management menu and handle user actions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.car_controller.CarController.management_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">management_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.car_controller.CarController.management_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the car management menu and handles user input for car operations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-controllers.rental_controller">
+<span id="controllers-rental-controller-module"></span><h2>controllers.rental_controller module<a class="headerlink" href="#module-controllers.rental_controller" title="Link to this heading">¶</a></h2>
+<p>rental_controller.py</p>
+<p>Controller module for rental operations in the car rental system.
+Handles user interaction for booking, approving, updating, and cancelling rentals.
+Relies on RentalService and EmailService for business logic and notifications.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.rental_controller.RentalController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.rental_controller.</span></span><span class="sig-name descname"><span class="pre">RentalController</span></span><a class="headerlink" href="#controllers.rental_controller.RentalController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Controller class for rental operations in the car rental system.
+Handles user interaction for booking, approving, updating, and cancelling rentals.
+Relies on RentalService and EmailService for business logic and notifications.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.rental_controller.RentalController.book_rental_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">book_rental_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.book_rental_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Allows a customer to book a rental car by selecting dates and a car.
+Validates date input and displays available cars for the selected period.
+Calculates total fee and confirms booking with the user.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.rental_controller.RentalController.customer_booking_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_booking_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.customer_booking_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the customer booking menu for managing bookings.
+Allows viewing, cancelling, and updating bookings for the logged-in customer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.rental_controller.RentalController.rental_approval_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rental_approval_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.rental_approval_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the rental approval menu for admin users.
+Allows admins to approve or reject pending rental requests and sends notification emails.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-controllers.user_controller">
+<span id="controllers-user-controller-module"></span><h2>controllers.user_controller module<a class="headerlink" href="#module-controllers.user_controller" title="Link to this heading">¶</a></h2>
+<p>user_controller.py</p>
+<p>Controller module for user authentication and management in the car rental system.
+Handles admin and customer registration, login, password changes, and menu navigation.
+Relies on UserService and related services for business logic and data operations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.user_controller.AdminUserController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.user_controller.</span></span><span class="sig-name descname"><span class="pre">AdminUserController</span></span><a class="headerlink" href="#controllers.user_controller.AdminUserController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#controllers.user_controller.UserController" title="controllers.user_controller.UserController"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserController</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.AdminUserController.admin_login">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_login" title="Link to this definition">¶</a></dt>
+<dd><p>Handles admin login process and authentication.
+Navigates to admin menu on successful login.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.AdminUserController.admin_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the admin menu and handles admin actions such as car management,
+rental approval, and password changes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.user_controller.</span></span><span class="sig-name descname"><span class="pre">CustomerUserController</span></span><a class="headerlink" href="#controllers.user_controller.CustomerUserController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#controllers.user_controller.UserController" title="controllers.user_controller.UserController"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserController</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.change_password">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.change_password" title="Link to this definition">¶</a></dt>
+<dd><p>Handles the password change process for customers.
+Validates current and new passwords, and calls CustomerService to update the password.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_login">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_login" title="Link to this definition">¶</a></dt>
+<dd><p>Handles customer login process and authentication.
+Navigates to customer main menu on successful login.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_main_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_main_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_main_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the main menu for logged-in customers and handles actions such as booking rentals,
+managing bookings, changing password, and logging out.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the customer menu for new or existing customers.
+Handles navigation to registration or login flows.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_signup">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_signup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_signup" title="Link to this definition">¶</a></dt>
+<dd><p>Handles customer registration, including username, email, and password validation.
+Calls UserService to register the new customer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="controllers.user_controller.UserController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">controllers.user_controller.</span></span><span class="sig-name descname"><span class="pre">UserController</span></span><a class="headerlink" href="#controllers.user_controller.UserController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="controllers.user_controller.UserController.user_main_menu">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_main_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.UserController.user_main_menu" title="Link to this definition">¶</a></dt>
+<dd><p>Displays the main menu for user selection (admin or customer).
+Handles navigation to admin or customer login/registration flows.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-controllers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-controllers" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Philip Rent-A-Car</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">controllers package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dao.html">dao package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">database module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">models package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">services package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">src</a></li>
+      <li>Next: <a href="dao.html" title="next chapter">dao package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Philip Niron Nithianandan.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/controllers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
