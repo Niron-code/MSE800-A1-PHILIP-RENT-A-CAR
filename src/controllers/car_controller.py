@@ -1,8 +1,20 @@
+"""
+car_controller.py
+
+Controller module for car management operations in the car rental system.
+Handles user interaction for adding, viewing, updating, and deleting cars.
+Relies on CarService for business logic and database operations.
+"""
 
 from services.car_service import CarService
 from utils.text_utils import CarTexts as txts
 
 def car_management_menu():
+    """
+    Displays the car management menu for admin users and handles user input.
+    Allows adding, viewing, updating, and deleting cars by interacting with CarService.
+    Loops until the user chooses to return to the previous menu.
+    """
     while True:
         print(txts.menu_header)
         print(txts.add_new_car)
@@ -12,6 +24,7 @@ def car_management_menu():
         print(txts.back_to_admin)
         choice = input(txts.enter_choice).strip()
         if choice == '1':
+            # Add a new car
             print(txts.add_new_car_header)
             make = input(txts.enter_make).strip()
             model = input(txts.enter_model).strip()
@@ -44,6 +57,7 @@ def car_management_menu():
             else:
                 print(txts.add_fail)
         elif choice == '2':
+            # View all available cars
             print(txts.all_cars_header)
             cars = CarService.get_available_cars()
             if not cars:
@@ -59,6 +73,7 @@ def car_management_menu():
                     print(f"{txts.rental_period.format(min=car[6], max=car[7])}")
                     print(txts.separator)
         elif choice == '3':
+            # Update car details
             car_id = input(txts.enter_update_id).strip()
             try:
                 car_id = int(car_id)
@@ -84,6 +99,7 @@ def car_management_menu():
             except ValueError:
                 print(txts.invalid_id)
         elif choice == '4':
+            # Delete a car
             car_id = input(txts.enter_delete_id).strip()
             try:
                 car_id = int(car_id)
@@ -98,6 +114,7 @@ def car_management_menu():
             except ValueError:
                 print(txts.invalid_id)
         elif choice == '5':
+            # Return to previous menu
             break
         else:
             print(txts.invalid_choice)

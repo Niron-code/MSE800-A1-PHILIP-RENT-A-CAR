@@ -1,3 +1,11 @@
+"""
+user_controller.py
+
+Controller module for user authentication and management in the car rental system.
+Handles admin and customer registration, login, password changes, and menu navigation.
+Relies on UserService and related services for business logic and data operations.
+"""
+
 from services.user_service import UserService
 import pwinput
 from controllers.car_controller import car_management_menu
@@ -12,6 +20,10 @@ CustomerUserController = None
 class UserController:
     @staticmethod
     def user_main_menu():
+        """
+        Displays the main menu for user selection (admin or customer).
+        Handles navigation to admin or customer login/registration flows.
+        """
         print(txts.txt_welcome)
         print(txts.txt_are_you_admin_or_customer)
         print(txts.txt_admin_option)
@@ -33,6 +45,10 @@ class UserController:
 class AdminUserController(UserController):
     @staticmethod
     def admin_login():
+        """
+        Handles admin login process and authentication.
+        Navigates to admin menu on successful login.
+        """
         print(txts.txt_admin_login)
         username = input(txts.txt_enter_username).strip()
         password = pwinput.pwinput(txts.txt_enter_password).strip()
@@ -46,6 +62,10 @@ class AdminUserController(UserController):
 
     @staticmethod
     def admin_menu(username):
+        """
+        Displays the admin menu and handles admin actions such as car management,
+        rental approval, and password changes.
+        """
         while True:
             print(txts.txt_admin_menu)
             print(txts.txt_manage_cars)
@@ -86,6 +106,10 @@ class AdminUserController(UserController):
 class CustomerUserController(UserController):
     @staticmethod
     def customer_menu():
+        """
+        Displays the customer menu for new or existing customers.
+        Handles navigation to registration or login flows.
+        """
         print(txts.txt_new_or_existing_customer)
         print(txts.txt_new_customer_option)
         print(txts.txt_existing_customer_option)
@@ -100,6 +124,10 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_signup():
+        """
+        Handles customer registration, including username, email, and password validation.
+        Calls UserService to register the new customer.
+        """
         print(txts.txt_customer_registration_header)
         username = input(txts.txt_choose_username).strip()
         while True:
@@ -128,6 +156,10 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_login():
+        """
+        Handles customer login process and authentication.
+        Navigates to customer main menu on successful login.
+        """
         print(txts.txt_customer_login)
         username = input(txts.txt_enter_username).strip()
         password = pwinput.pwinput(txts.txt_enter_password).strip()
@@ -141,6 +173,10 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def customer_main_menu(user):
+        """
+        Displays the main menu for logged-in customers and handles actions such as booking rentals,
+        managing bookings, changing password, and logging out.
+        """
         while True:
             print(txts.txt_customer_menu.format(username=user.username))
             print(txts.txt_book_rental)
@@ -163,7 +199,11 @@ class CustomerUserController(UserController):
 
     @staticmethod
     def change_password(user):
-        print(txts.txt_change_password_header)
+        """
+        Handles the password change process for customers.
+        Validates current and new passwords, and calls CustomerService to update the password.
+        """
+        print(txts.txt_change_password)
         old_password = pwinput.pwinput(txts.txt_enter_current_password).strip()
         while True:
             new_password = pwinput.pwinput(txts.txt_enter_new_password).strip()

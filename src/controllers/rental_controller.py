@@ -1,3 +1,11 @@
+"""
+rental_controller.py
+
+Controller module for rental operations in the car rental system.
+Handles user interaction for booking, approving, updating, and cancelling rentals.
+Relies on RentalService and EmailService for business logic and notifications.
+"""
+
 from email.mime.text import MIMEText
 from dao.user_dao import UserDAO
 from services.rental_service import RentalService
@@ -7,6 +15,10 @@ from utils.utils import Utils
 
 
 def rental_approval_menu():
+    """
+    Displays the rental approval menu for admin users.
+    Allows admins to approve or reject pending rental requests and sends notification emails.
+    """
     print(txts.pending_requests)
     pending = RentalService.get_pending_rentals()
     if not pending:
@@ -52,6 +64,11 @@ def rental_approval_menu():
         print(txts.invalid_action)
 
 def book_rental_menu(user):
+    """
+    Allows a customer to book a rental car by selecting dates and a car.
+    Validates date input and displays available cars for the selected period.
+    Calculates total fee and confirms booking with the user.
+    """
     while True:
         start_date = input(txts.start_date_prompt).strip()
         if not Utils.is_start_date_today_or_future(start_date):
@@ -105,6 +122,10 @@ def book_rental_menu(user):
         print(txts.booking_cancelled)
 
 def customer_booking_menu(user):
+    """
+    Displays the customer booking menu for managing bookings.
+    Allows viewing, cancelling, and updating bookings for the logged-in customer.
+    """
     while True:
         print(txts.booking_menu)
         print(txts.view_bookings)
