@@ -117,7 +117,7 @@ class UserTexts:
     txt_new_customer_option = "1. New Customer (Sign Up)"
     txt_existing_customer_option = "2. Existing Customer (Login)"
     txt_enter_choice = "Enter choice: "
-    txt_enter_choice_12 = "Enter choice (1/2): "
+    txt_enter_choice_12 = "Enter choice (1/2/0): "
     txt_enter_current_password = "Enter current password: "
     txt_admin_login = "\nAdmin Login"
     txt_customer_registration_header = "\nCustomer Registration"
