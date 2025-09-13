@@ -25,3 +25,6 @@ src/models/__pycache__/__init__.cpython-313.pyc
 src/__pycache__/main.cpython-313.pyc
 tests/__pycache__/test_sample.cpython-313-pytest-8.3.4.pyc
 tests/__pycache__/test_user_main_menu.cpython-313-pytest-8.3.4.pyc
+tests/controllers/__pycache__/test_user_controller.cpython-313-pytest-8.3.4.pyc
+tests/models/__pycache__/test_user_model.cpython-313-pytest-8.3.4.pyc
+tests/services/__pycache__/test_user_service.cpython-313-pytest-8.3.4.pyc
