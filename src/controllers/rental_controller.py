@@ -6,8 +6,8 @@ Handles user interaction for booking, approving, updating, and cancelling rental
 Relies on RentalService and EmailService for business logic and notifications.
 """
 
-from email.mime.text import MIMEText
 from dao.user_dao import UserDAO
+from dao.car_dao import CarDAO
 from services.rental_service import RentalService
 from services.email_service import EmailService
 from utils.text_utils import RentalTexts as txts
@@ -51,13 +51,17 @@ class RentalController:
         car_id = rental[2]
         start_date = rental[3]
         end_date = rental[4]
+        # Fetch car make/model for email
+        car = CarDAO.get_car_by_id(car_id)
+        car_make = car[1] if car else "Unknown"
+        car_model = car[2] if car else "Unknown"
         if action == 'a':
             success = RentalService.update_rental_status(rental_id, 'approved')
             if success:
                 print(txts.approved)
                 if user_email:
                     amount = rental[6]
-                    EmailService.send_approval_email(user_email, car_id, start_date, end_date, amount)
+                    EmailService.send_approval_email(user_email, car_make, car_model, start_date, end_date, amount)
             else:
                 print(txts.approve_fail)
         elif action == 'r':
@@ -65,7 +69,7 @@ class RentalController:
             if success:
                 print(txts.rejected)
                 if user_email:
-                    EmailService.send_rejection_email(user_email, car_id, start_date, end_date)
+                    EmailService.send_rejection_email(user_email, car_make, car_model, start_date, end_date)
             else:
                 print(txts.reject_fail)
         else:
@@ -149,7 +153,7 @@ class RentalController:
                     print(txts.no_bookings)
                 else:
                     for booking in bookings:
-                        print(f"ID: {booking[0]}, Car ID: {booking[2]}, Start: {booking[3]}, End: {booking[4]}, Fee: {booking[5]}, Status: {booking[6]}")
+                        print(f"ID: {booking[0]}, Car ID: {booking[2]}, Start: {booking[3]}, End: {booking[4]}, Status: {booking[5]}, Fee: {booking[6]}")
             elif choice == '2':
                 rental_id = input(txts.booking_id_cancel).strip()
                 try:

@@ -38,12 +38,12 @@ class EmailService:
             print(f"Failed to send email: {e}")
 
     @staticmethod
-    def send_approval_email(to_email, car_id, start_date, end_date, amount):
+    def send_approval_email(to_email, car_make, car_model, start_date, end_date, amount):
         """
         Send an approval email to the customer for a successful car rental booking.
         """
         subject = "Philip Rent-A-Car: Your Car Rental Has Been Approved"
-        body = f"Your booking for car ID {car_id} from {start_date} to {end_date} has been approved. The total amount is ${amount}. Due upon pickup."
+        body = f"Your booking for {car_make} {car_model} from {start_date} to {end_date} has been approved. The total amount is ${amount}. Due upon pickup."
         EmailService.send_email(to_email, subject, body)
 
     @staticmethod
@@ -54,3 +54,11 @@ class EmailService:
         subject = "Philip Rent-A-Car: Your Car Rental Has Been Rejected"
         body = f"Your booking for car ID {car_id} from {start_date} to {end_date} has been rejected."
         EmailService.send_email(to_email, subject, body)
+        @staticmethod
+        def send_rejection_email(to_email, car_make, car_model, start_date, end_date):
+            """
+            Send a rejection email to the customer for a declined car rental booking.
+            """
+            subject = "Philip Rent-A-Car: Your Car Rental Has Been Rejected"
+            body = f"Your booking for {car_make} {car_model} from {start_date} to {end_date} has been rejected."
+            EmailService.send_email(to_email, subject, body)

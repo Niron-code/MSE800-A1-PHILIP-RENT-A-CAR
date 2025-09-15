@@ -10,7 +10,7 @@ from models.car import Car
 from database import Database
 from typing import List,  Tuple
 
-class CarDAO:
+class CarDAO:  
     """
     DAO class for performing CRUD operations on car records in the database.
     """
@@ -76,3 +76,16 @@ class CarDAO:
         cars = cursor.fetchall()
         conn.close()
         return cars
+    
+    @staticmethod
+    def get_car_by_id(car_id: int) -> tuple:
+        """
+        Retrieves a car record from the database by car_id.
+        Returns the car record as a tuple, or None if not found.
+        """
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM cars WHERE id=?', (car_id,))
+        car = cursor.fetchone()
+        conn.close()
+        return car
