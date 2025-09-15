@@ -10,6 +10,8 @@ from services.user_service import UserService
 import pwinput
 from controllers.car_controller import CarController
 from controllers.rental_controller import RentalController
+
+import sys
 from utils.utils import Utils
 from utils.text_utils import UserTexts as txts
 
@@ -38,7 +40,7 @@ class UserController:
             globals()['CustomerUserController'].customer_menu()
         elif choice == '0':
             print(txts.txt_exiting)
-            exit()
+            sys.exit()
         else:
             print(txts.txt_invalid_choice)
             UserController.user_main_menu()
