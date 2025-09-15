@@ -122,6 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="database.html">database module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="database.html#database.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="database.html#database.Database.DB_NAME"><code class="docutils literal notranslate"><span class="pre">Database.DB_NAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#database.Database.get_conn_cursor"><code class="docutils literal notranslate"><span class="pre">Database.get_conn_cursor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="database.html#database.Database.get_connection"><code class="docutils literal notranslate"><span class="pre">Database.get_connection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="database.html#database.Database.init_db"><code class="docutils literal notranslate"><span class="pre">Database.init_db()</span></code></a></li>
 </ul>
@@ -367,9 +368,12 @@
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_admin_login"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_admin_login</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_admin_logout_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_admin_logout_option</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_admin_menu"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_admin_menu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_admin_menu_prompt"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_admin_menu_prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_admin_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_admin_option</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_approve_reject_rentals"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_approve_reject_rentals</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_are_you_admin_or_customer"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_are_you_admin_or_customer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_back_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_back_option</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_back_prompt"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_back_prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_book_rental"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_book_rental</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_change_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_change_password</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_change_password_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_change_password_option</span></code></a></li>
@@ -378,12 +382,11 @@
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_confirm_new_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_confirm_new_password</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_confirm_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_confirm_password</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_login"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_main_menu_prompt"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_main_menu_prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_menu"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_menu</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_option</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_registration"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_registration</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_customer_registration_header"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_customer_registration_header</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_choice"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_choice</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_choice_12"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_choice_12</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_current_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_current_password</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_email"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_email</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_new_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_new_password</span></code></a></li>
@@ -391,6 +394,7 @@
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_enter_username"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_enter_username</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_existing_customer_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_existing_customer_option</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_exit_option"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_exit_option</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_exit_prompt"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_exit_prompt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_exiting"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_exiting</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_incorrect_current_password"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_incorrect_current_password</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.text_utils.UserTexts.txt_invalid_admin_credentials"><code class="docutils literal notranslate"><span class="pre">UserTexts.txt_invalid_admin_credentials</span></code></a></li>
@@ -418,6 +422,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.utils">utils.utils module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="utils.html#utils.utils.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#utils.utils.Utils.clear_screen"><code class="docutils literal notranslate"><span class="pre">Utils.clear_screen()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.utils.Utils.is_end_date_valid"><code class="docutils literal notranslate"><span class="pre">Utils.is_end_date_valid()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.utils.Utils.is_start_date_today_or_future"><code class="docutils literal notranslate"><span class="pre">Utils.is_start_date_today_or_future()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="utils.html#utils.utils.Utils.is_valid_email"><code class="docutils literal notranslate"><span class="pre">Utils.is_valid_email()</span></code></a></li>

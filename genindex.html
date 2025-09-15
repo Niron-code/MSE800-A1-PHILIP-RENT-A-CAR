@@ -186,13 +186,15 @@
 </li>
       <li><a href="services.html#services.user_service.AdminService.change_admin_password">change_admin_password() (services.user_service.AdminService static method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services.html#services.user_service.CustomerService.change_customer_password">change_customer_password() (services.user_service.CustomerService static method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="controllers.html#controllers.user_controller.CustomerUserController.change_password">change_password() (controllers.user_controller.CustomerUserController static method)</a>
 </li>
       <li><a href="dao.html#dao.user_dao.UserDAO.change_user_password">change_user_password() (dao.user_dao.UserDAO static method)</a>
+</li>
+      <li><a href="utils.html#utils.utils.Utils.clear_screen">clear_screen() (utils.utils.Utils static method)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.RentalTexts.confirm_booking">confirm_booking (utils.text_utils.RentalTexts attribute)</a>
 </li>
@@ -375,14 +377,16 @@
       </ul></li>
       <li><a href="dao.html#dao.car_dao.CarDAO.get_car_by_id">get_car_by_id() (dao.car_dao.CarDAO static method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="dao.html#dao.rental_dao.RentalDAO.get_car_status_for_dates">get_car_status_for_dates() (dao.rental_dao.RentalDAO static method)</a>
 
       <ul>
         <li><a href="services.html#services.rental_service.RentalService.get_car_status_for_dates">(services.rental_service.RentalService static method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="database.html#database.Database.get_conn_cursor">get_conn_cursor() (database.Database static method)</a>
+</li>
       <li><a href="database.html#database.Database.get_connection">get_connection() (database.Database static method)</a>
 </li>
       <li><a href="dao.html#dao.rental_dao.RentalDAO.get_pending_rentals">get_pending_rentals() (dao.rental_dao.RentalDAO static method)</a>
@@ -746,11 +750,17 @@
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_admin_menu">txt_admin_menu (utils.text_utils.UserTexts attribute)</a>
 </li>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_admin_menu_prompt">txt_admin_menu_prompt (utils.text_utils.UserTexts attribute)</a>
+</li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_admin_option">txt_admin_option (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_approve_reject_rentals">txt_approve_reject_rentals (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_are_you_admin_or_customer">txt_are_you_admin_or_customer (utils.text_utils.UserTexts attribute)</a>
+</li>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_back_option">txt_back_option (utils.text_utils.UserTexts attribute)</a>
+</li>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_back_prompt">txt_back_prompt (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_book_rental">txt_book_rental (utils.text_utils.UserTexts attribute)</a>
 </li>
@@ -768,6 +778,8 @@
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_customer_login">txt_customer_login (utils.text_utils.UserTexts attribute)</a>
 </li>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_customer_main_menu_prompt">txt_customer_main_menu_prompt (utils.text_utils.UserTexts attribute)</a>
+</li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_customer_menu">txt_customer_menu (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_customer_option">txt_customer_option (utils.text_utils.UserTexts attribute)</a>
@@ -776,25 +788,23 @@
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_customer_registration_header">txt_customer_registration_header (utils.text_utils.UserTexts attribute)</a>
 </li>
-      <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_choice">txt_enter_choice (utils.text_utils.UserTexts attribute)</a>
-</li>
-      <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_choice_12">txt_enter_choice_12 (utils.text_utils.UserTexts attribute)</a>
-</li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_current_password">txt_enter_current_password (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_email">txt_enter_email (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_new_password">txt_enter_new_password (utils.text_utils.UserTexts attribute)</a>
 </li>
-      <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_password">txt_enter_password (utils.text_utils.UserTexts attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_password">txt_enter_password (utils.text_utils.UserTexts attribute)</a>
+</li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_enter_username">txt_enter_username (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_existing_customer_option">txt_existing_customer_option (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_exit_option">txt_exit_option (utils.text_utils.UserTexts attribute)</a>
+</li>
+      <li><a href="utils.html#utils.text_utils.UserTexts.txt_exit_prompt">txt_exit_prompt (utils.text_utils.UserTexts attribute)</a>
 </li>
       <li><a href="utils.html#utils.text_utils.UserTexts.txt_exiting">txt_exiting (utils.text_utils.UserTexts attribute)</a>
 </li>
