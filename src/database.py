@@ -6,6 +6,7 @@ Defines functions to get a database connection and initialize tables for users, 
 """
 
 import sqlite3
+import bcrypt
 
 class Database:
     """
@@ -71,7 +72,10 @@ class Database:
         # Insert default admin if not exists
         cursor.execute('SELECT * FROM users WHERE username=? AND role=?', ('admin', 'admin'))
         if not cursor.fetchone():
-            cursor.execute('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', ('admin', 'philip.car.rental@gmail.com', 'admin123', 'admin'))
+            admin_password = 'admin123'
+            hashed_pw = bcrypt.hashpw(admin_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            cursor.execute('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', ('admin', 'philip.car.rental@gmail.com', hashed_pw, 'admin'))
+      
         # Insert or update 3 default cars
         default_cars = [
             ('Mercedes-Benz', 'S-Class', 2025, 1500, 1, 2, 10, 'luxury', 200.0),
