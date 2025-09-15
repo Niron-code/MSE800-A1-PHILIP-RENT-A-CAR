@@ -2,7 +2,7 @@
 utils.py
 
 Utility module for the car rental system.
-Provides validation functions for passwords, emails, and rental dates.
+Provides static methods for input validation (password, email) and date checks (start/end dates).
 """
 
 import datetime
@@ -11,8 +11,14 @@ import re
 
 class Utils:
 	"""
-	Utility class containing static methods for input validation and date checks.
+	Utility class providing static methods for validation and other common tasks in the car rental system.
+
+	Includes:
+	- Password and email validation
+	- Date checks for rental periods
+	- clear_screen(): the standard method for clearing the terminal screen before displaying menus or after logout, ensuring a consistent UI experience. Use Utils.clear_screen() instead of direct os.system calls throughout the application.
 	"""
+	
 	@staticmethod
 	def is_valid_password(password: str) -> bool:
 		"""
@@ -69,3 +75,14 @@ class Utils:
 		except Exception:
 			return False
 
+	@staticmethod
+	def clear_screen():
+		"""
+		Clears the terminal screen.
+
+		This method should be used to refresh the terminal UI before displaying any main menu or after logging out,
+		ensuring a clean and consistent user experience. It replaces all direct calls to os.system('cls'...) or os.system('clear')
+		throughout the car rental system. Always call Utils.clear_screen() at the start of menu methods and on logout.
+		"""
+		import os
+		os.system('cls' if os.name == 'nt' else 'clear')

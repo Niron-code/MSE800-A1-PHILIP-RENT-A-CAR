@@ -22,8 +22,7 @@ class RentalDAO:
         Inserts a new rental record into the database.
         Returns True if the operation is successful.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('''
             INSERT INTO rentals (user_id, car_id, start_date, end_date, total_fee, status)
             VALUES (?, ?, ?, ?, ?, ?)
@@ -38,8 +37,7 @@ class RentalDAO:
         Calculates the total rental fee for a car between two dates, including any extra charges.
         Returns the calculated fee as a float.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT make, model, year, mileage, available_now, min_rent_period, max_rent_period, car_type, base_rate_per_day FROM cars WHERE id=?', (car_id,))
         car_row = cursor.fetchone()
         if not car_row:
@@ -74,8 +72,7 @@ class RentalDAO:
         Retrieves all pending rental requests from the database.
         Returns a list of rental records as tuples.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT * FROM rentals WHERE status="pending"')
         rentals = cursor.fetchall()
         conn.close()
@@ -87,8 +84,7 @@ class RentalDAO:
         Updates the status of a rental record by rental_id.
         Returns True if the operation is successful.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('UPDATE rentals SET status=? WHERE id=?', (status, rental_id))
         conn.commit()
         conn.close()
@@ -100,8 +96,7 @@ class RentalDAO:
         Retrieves all cars and their booking status for the given date range.
         Returns a tuple of (cars, car_status_dict).
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT * FROM cars')
         cars = cursor.fetchall()
         car_status = {}

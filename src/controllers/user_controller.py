@@ -18,18 +18,20 @@ AdminUserController = None
 CustomerUserController = None
 
 class UserController:
+
     @staticmethod
-    def user_main_menu():
+    def user_main_menu(): 
         """
         Displays the main menu for user selection (admin or customer).
         Handles navigation to admin or customer login/registration flows.
         """
+        Utils.clear_screen()
         print(txts.txt_welcome)
         print(txts.txt_are_you_admin_or_customer)
         print(txts.txt_admin_option)
         print(txts.txt_customer_option)
         print(txts.txt_exit_option)
-        choice = input(txts.txt_enter_choice_12).strip()
+        choice = input(txts.txt_exit_prompt).strip()
         if choice == '1':
             globals()['AdminUserController'].admin_login()
         elif choice == '2':
@@ -40,7 +42,6 @@ class UserController:
         else:
             print(txts.txt_invalid_choice)
             UserController.user_main_menu()
-
 
 class AdminUserController(UserController):
     @staticmethod
@@ -66,13 +67,15 @@ class AdminUserController(UserController):
         Displays the admin menu and handles admin actions such as car management,
         rental approval, and password changes.
         """
+        Utils.clear_screen()
+        print(txts.txt_welcome_admin.format(username=username))
         while True:
             print(txts.txt_admin_menu)
             print(txts.txt_manage_cars)
             print(txts.txt_approve_reject_rentals)
             print(txts.txt_admin_change_password_option)
             print(txts.txt_admin_logout_option)
-            choice = input(txts.txt_enter_choice).strip()
+            choice = input(txts.txt_admin_menu_prompt).strip()
             if choice == '1':
                 CarController.management_menu()
             elif choice == '2':
@@ -97,6 +100,7 @@ class AdminUserController(UserController):
                     print(txts.txt_incorrect_current_password)
             elif choice == '4':
                 print(txts.txt_logging_out)
+                Utils.clear_screen()
                 UserController.user_main_menu()
                 break
             else:
@@ -105,19 +109,22 @@ class AdminUserController(UserController):
 
 class CustomerUserController(UserController):
     @staticmethod
-    def customer_menu():
+    def customer_menu(): 
         """
         Displays the customer menu for new or existing customers.
         Handles navigation to registration or login flows.
         """
-        print(txts.txt_new_or_existing_customer)
+        Utils.clear_screen()
         print(txts.txt_new_customer_option)
         print(txts.txt_existing_customer_option)
-        choice = input(txts.txt_enter_choice_12).strip()
+        print(txts.txt_back_option)
+        choice = input(txts.txt_back_prompt).strip()
         if choice == '1':
             CustomerUserController.customer_signup()
         elif choice == '2':
             CustomerUserController.customer_login()
+        elif choice == '0':
+            UserController.user_main_menu()
         else:
             print(txts.txt_invalid_choice)
             CustomerUserController.customer_menu()
@@ -146,7 +153,7 @@ class CustomerUserController(UserController):
                 print(txts.txt_password_invalid)
                 continue
             break
-        success = UserService.register_user(username, password, email, 'customer')
+        success = UserService.register_customer(username, email, password)
         if success:
             print(txts.txt_registration_success)
             CustomerUserController.customer_login()
@@ -172,18 +179,19 @@ class CustomerUserController(UserController):
             CustomerUserController.customer_menu()
 
     @staticmethod
-    def customer_main_menu(user):
+    def customer_main_menu(user): 
         """
         Displays the main menu for logged-in customers and handles actions such as booking rentals,
         managing bookings, changing password, and logging out.
         """
+        Utils.clear_screen()
         while True:
             print(txts.txt_customer_menu.format(username=user.username))
             print(txts.txt_book_rental)
             print(txts.txt_manage_bookings)
             print(txts.txt_change_password_option)
             print(txts.txt_logout_option)
-            choice = input(txts.txt_enter_choice).strip()
+            choice = input(txts.txt_customer_main_menu_prompt).strip()
             if choice == '1':
                 RentalController.book_rental_menu(user)
             elif choice == '2':
@@ -192,6 +200,7 @@ class CustomerUserController(UserController):
                 CustomerUserController.change_password(user)
             elif choice == '4':
                 print(txts.txt_logging_out)
+                Utils.clear_screen()
                 UserController.user_main_menu()
                 break
             else:

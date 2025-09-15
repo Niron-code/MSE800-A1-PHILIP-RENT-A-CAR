@@ -9,6 +9,7 @@ import sqlite3
 import bcrypt
 
 class Database:
+   
     """
     Handles SQLite database connection and schema initialization for the car rental system.
     Provides methods to get a database connection and initialize tables for users, cars, and rentals.
@@ -21,6 +22,15 @@ class Database:
         Returns a new SQLite database connection using the configured database name.
         """
         return sqlite3.connect(Database.DB_NAME)
+
+    @staticmethod
+    def get_conn_cursor():
+        """
+        Returns a new SQLite database connection and cursor.    
+        """
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+        return conn, cursor
 
     @staticmethod
     def init_db():

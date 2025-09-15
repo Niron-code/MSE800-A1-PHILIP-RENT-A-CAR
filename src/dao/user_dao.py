@@ -21,8 +21,7 @@ class UserDAO:
         Authenticates a user by username and password.
         Returns user details tuple if successful, None otherwise.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT id, username, password, email, role FROM users WHERE username=?', (username,))
         result = cursor.fetchone()
         conn.close()
@@ -38,8 +37,7 @@ class UserDAO:
         Changes the password for a user if the old password matches.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT password FROM users WHERE username=? AND role=?', (username, role))
         result = cursor.fetchone()
         if result and bcrypt.checkpw(old_password.encode('utf-8'), result[0].encode('utf-8')):
@@ -57,8 +55,7 @@ class UserDAO:
         Registers a new user in the database.
         Returns True if the operation is successful, False otherwise.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         try:
             hashed_pw = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
             cursor.execute('INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)', (user.username, hashed_pw, user.role, user.email))
@@ -75,8 +72,7 @@ class UserDAO:
         Retrieves a User object by username and password if credentials are valid.
         Returns a User instance or None.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT id, username, password, role FROM users WHERE username=?', (username,))
         result = cursor.fetchone()
         conn.close()
@@ -92,8 +88,7 @@ class UserDAO:
         Retrieves the email address for a user by user_id.
         Returns the email as a string or None if not found.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT email FROM users WHERE id=?', (user_id,))
         result = cursor.fetchone()
         conn.close()

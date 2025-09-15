@@ -20,8 +20,7 @@ class CarDAO:
         Inserts a new car record into the database.
         Returns True if the operation is successful.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('''
             INSERT INTO cars (
                 make, model, year, mileage, available_now, 
@@ -41,8 +40,7 @@ class CarDAO:
         Accepts keyword arguments for fields to update.
         Returns True if the operation is successful.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         fields = ', '.join([f"{k}=?" for k in kwargs.keys()])
         values = list(kwargs.values())
         values.append(car_id)
@@ -57,8 +55,7 @@ class CarDAO:
         Deletes a car record from the database by car_id.
         Returns True if the operation is successful.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('DELETE FROM cars WHERE id=?', (car_id,))
         conn.commit()
         conn.close()
@@ -70,8 +67,7 @@ class CarDAO:
         Retrieves all available cars from the database (where available_now=1).
         Returns a list of car records as tuples.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT * FROM cars WHERE available_now=1')
         cars = cursor.fetchall()
         conn.close()
@@ -83,8 +79,7 @@ class CarDAO:
         Retrieves a car record from the database by car_id.
         Returns the car record as a tuple, or None if not found.
         """
-        conn = Database.get_connection()
-        cursor = conn.cursor()
+        conn, cursor = Database.get_conn_cursor()
         cursor.execute('SELECT * FROM cars WHERE id=?', (car_id,))
         car = cursor.fetchone()
         conn.close()
