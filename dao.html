@@ -71,6 +71,13 @@ Returns a list of car records as tuples.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="dao.car_dao.CarDAO.get_car_by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_car_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.get_car_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a car record from the database by car_id.
+Returns the car record as a tuple, or None if not found.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="dao.car_dao.CarDAO.update_car">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">car_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dao.car_dao.CarDAO.update_car" title="Link to this definition">¶</a></dt>
 <dd><p>Updates fields of an existing car record by car_id.
