@@ -42,8 +42,8 @@ A user-friendly car rental management system for Windows, supporting both admin 
 - **Menu Navigation**: Use the numbered options to navigate. Enter `0` to exit or go back as prompted.
 
 ## Versioning
-- Stable releases are tagged (e.g., `v1.0.0`, `v1.0.1`).
-- See the [Releases](https://github.com/yourusername/yourrepo/releases) page for changelogs and downloads.
+- Stable releases are tagged (e.g., `v1.0.0`).
+- See the [Releases](https://github.com/Niron-code/MSE800-A1-PHILIP-RENT-A-CAR/releases) page for changelogs and downloads.
 
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
