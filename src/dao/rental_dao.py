@@ -108,7 +108,7 @@ class RentalDAO:
         for car in cars:
             car_id = car[0]
             cursor.execute('''
-                SELECT status FROM rentals WHERE car_id=? AND status != "cancelled" AND NOT (
+                SELECT status FROM rentals WHERE car_id=? AND status NOT IN ("cancelled", "rejected") AND NOT (
                     end_date < ? OR start_date > ?
                 )
             ''', (car_id, start_date, end_date))
