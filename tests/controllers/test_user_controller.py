@@ -13,11 +13,11 @@ class TestUserController:
         with pytest.raises(SystemExit):
             UserController.user_main_menu(texts)
         captured = capsys.readouterr()
-        assert texts['txt_welcome'] in captured.out
-        assert texts['txt_are_you_admin_or_customer'] in captured.out
-        assert texts['txt_admin_option'] in captured.out
-        assert texts['txt_customer_option'] in captured.out
-        assert texts['txt_exit_option'] in captured.out
+        assert texts['UserTexts']['txt_welcome'] in captured.out
+        assert texts['UserTexts']['txt_are_you_admin_or_customer'] in captured.out
+        assert texts['UserTexts']['txt_admin_option'] in captured.out
+        assert texts['UserTexts']['txt_customer_option'] in captured.out
+        assert texts['UserTexts']['txt_exit_option'] in captured.out
 
     def test_main_menu_invalid_choice(self, monkeypatch, capsys):
         texts = Utils.load_texts('en')
@@ -26,8 +26,8 @@ class TestUserController:
         with pytest.raises(SystemExit):
             UserController.user_main_menu(texts)
         captured = capsys.readouterr()
-        assert texts['txt_invalid_choice'] in captured.out
-        assert texts['txt_welcome'] in captured.out  # Menu displayed again
+        assert texts['UserTexts']['txt_invalid_choice'] in captured.out
+        assert texts['UserTexts']['txt_welcome'] in captured.out  # Menu displayed again
 
     def test_admin_login_success(self, monkeypatch, capsys):
         texts = Utils.load_texts('en')
@@ -44,17 +44,17 @@ class TestUserController:
             username = 'admin'
         monkeypatch.setattr(user_controller, 'UserService', type('MockService', (), {'login_user': staticmethod(lambda u, p: MockAdmin())}))
         # Patch admin_menu to exit after login
-        monkeypatch.setattr(user_controller.AdminUserController, 'admin_menu', lambda username: exit())
+        monkeypatch.setattr(user_controller.AdminUserController, 'admin_menu', lambda username, texts: exit())
         with pytest.raises(SystemExit):
             user_controller.AdminUserController.admin_login(texts)
         captured = capsys.readouterr()
-        assert texts['txt_admin_login'] in captured.out
-        assert texts['txt_welcome_admin'].format(username='admin') in captured.out
+        assert texts['UserTexts']['txt_admin_login'] in captured.out
+        assert texts['UserTexts']['txt_welcome_admin'].format(username='admin') in captured.out
 
     def test_admin_login_fail(self, monkeypatch, capsys):
         texts = Utils.load_texts('en')
         # Simulate username and password input
-        inputs = iter(['admin', 'wrongpw'])
+        inputs = iter(['admin', 'wrongpw', 'admin', 'wrongpw'])  # Add more attempts to avoid StopIteration
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
         import pwinput
         monkeypatch.setattr(pwinput, 'pwinput', lambda _: 'wrongpw')
@@ -65,6 +65,6 @@ class TestUserController:
             monkeypatch.setattr(user_controller.UserController, 'user_main_menu', lambda: exit())
             user_controller.AdminUserController.admin_login(texts)
         captured = capsys.readouterr()
-        assert texts['txt_admin_login'] in captured.out
-        assert texts['txt_invalid_admin_credentials'] in captured.out
+        assert texts['UserTexts']['txt_admin_login'] in captured.out
+        assert texts['UserTexts']['txt_invalid_admin_credentials'] in captured.out
 
