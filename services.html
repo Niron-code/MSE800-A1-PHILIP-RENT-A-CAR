@@ -91,42 +91,23 @@ Provides methods to send approval and rejection emails to customers using SMTP.<
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Service class for handling email notifications.
 Uses SMTP to send emails for booking approvals and rejections.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="services.email_service.EmailService.SENDER_EMAIL">
-<span class="sig-name descname"><span class="pre">SENDER_EMAIL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'philip.car.rental&#64;gmail.com'</span></em><a class="headerlink" href="#services.email_service.EmailService.SENDER_EMAIL" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="services.email_service.EmailService.SENDER_PASSWORD">
-<span class="sig-name descname"><span class="pre">SENDER_PASSWORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rgbw</span> <span class="pre">mikh</span> <span class="pre">hbvp</span> <span class="pre">wrrd'</span></em><a class="headerlink" href="#services.email_service.EmailService.SENDER_PASSWORD" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="services.email_service.EmailService.SMTP_PORT">
-<span class="sig-name descname"><span class="pre">SMTP_PORT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">587</span></em><a class="headerlink" href="#services.email_service.EmailService.SMTP_PORT" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="services.email_service.EmailService.SMTP_SERVER">
-<span class="sig-name descname"><span class="pre">SMTP_SERVER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'smtp.gmail.com'</span></em><a class="headerlink" href="#services.email_service.EmailService.SMTP_SERVER" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="services.email_service.EmailService.send_approval_email">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_approval_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_make</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_approval_email" title="Link to this definition">¶</a></dt>
-<dd><p>Send an approval email to the customer for a successful car rental booking.</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_approval_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_make</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_approval_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send an approval email using i18n texts.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="services.email_service.EmailService.send_email">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_email" title="Link to this definition">¶</a></dt>
-<dd><p>Send a generic email with the given subject and body to the specified recipient.</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a generic email with the given subject and body to the specified recipient.
+Uses i18n texts for confirmation message if provided.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="services.email_service.EmailService.send_rejection_email">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_rejection_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_rejection_email" title="Link to this definition">¶</a></dt>
-<dd><p>Send a rejection email to the customer for a declined car rental booking.</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_rejection_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_make</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">car_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#services.email_service.EmailService.send_rejection_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a rejection email using i18n texts.</p>
 </dd></dl>
 
 </dd></dl>
