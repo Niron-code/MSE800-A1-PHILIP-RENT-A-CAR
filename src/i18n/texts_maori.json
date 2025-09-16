@@ -154,5 +154,12 @@
     "invalid_choice": "Kōwhiringa hē. Tēnā whakamātau anō.",
     "start_date_invalid": "Me tīmata te rā i tēnei rā, ā muri ake rānei.",
     "end_date_invalid": "Me mutu te rā i te wāheke, kāore i mua i te rā tīmata."
+  },
+  "EmailTexts": {
+    "approval_subject": "Kua Whakaaetia tō Rīhi!",
+    "approval_body": "E te Kiritaki,\n\nKua whakaaetia tō rīhi mō te {car_make} {car_model} mai i te {start_date} ki te {end_date}. Utu katoa: ${amount}.\n\nNgā mihi mō tō kōwhiringa i Philip Rent-A-Car!",
+    "rejection_subject": "Kua Whakakāhoretia tō Tono Rīhi",
+  "rejection_body": "E te Kiritaki,\n\nAroha mai, kāore i whakaaetia tō tono rīhi mō te {car_make} {car_model} mai i te {start_date} ki te {end_date}.\n\nTēnā whakapā mai mō ētahi atu pārongo.",
+  "email_sent": "I tukuna te īmēra ki {to_email}"
   }
 }

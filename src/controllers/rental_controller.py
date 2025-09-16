@@ -62,7 +62,7 @@ class RentalController:
                 print(rental_txts['approved'])
                 if user_email:
                     amount = rental[6]
-                    EmailService.send_approval_email(user_email, car_make, car_model, start_date, end_date, amount)
+                    EmailService.send_approval_email(user_email, car_make, car_model, start_date, end_date, amount, texts)
             else:
                 print(rental_txts['approve_fail'])
         elif action == 'r':
@@ -70,7 +70,7 @@ class RentalController:
             if success:
                 print(rental_txts['rejected'])
                 if user_email:
-                    EmailService.send_rejection_email(user_email, car_make, car_model, start_date, end_date)
+                    EmailService.send_rejection_email(user_email, car_make, car_model, start_date, end_date, texts)
             else:
                 print(rental_txts['reject_fail'])
         else:
