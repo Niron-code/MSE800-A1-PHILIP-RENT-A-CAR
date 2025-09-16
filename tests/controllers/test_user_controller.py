@@ -54,7 +54,7 @@ class TestUserController:
     def test_admin_login_fail(self, monkeypatch, capsys):
         texts = Utils.load_texts('en')
         # Simulate username and password input
-        inputs = iter(['admin', 'wrongpw', 'admin', 'wrongpw'])  # Add more attempts to avoid StopIteration
+        inputs = iter(['admin', 'wrongpw'] * 5)  # Provide enough attempts for all allowed login retries
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
         import pwinput
         monkeypatch.setattr(pwinput, 'pwinput', lambda _: 'wrongpw')
