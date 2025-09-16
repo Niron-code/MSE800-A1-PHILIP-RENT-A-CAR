@@ -3,7 +3,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import pytest
 from controllers.user_controller import UserController
-from utils.text_utils import UserTexts as txts
+from controllers import user_controller
 
 class TestUserController:
     def test_main_menu_texts(self, monkeypatch, capsys):
@@ -12,11 +12,11 @@ class TestUserController:
         with pytest.raises(SystemExit):
             UserController.user_main_menu()
         captured = capsys.readouterr()
-        assert txts.txt_welcome in captured.out
-        assert txts.txt_are_you_admin_or_customer in captured.out
-        assert txts.txt_admin_option in captured.out
-        assert txts.txt_customer_option in captured.out
-        assert txts.txt_exit_option in captured.out
+        assert user_controller.txts['txt_welcome'] in captured.out
+        assert user_controller.txts['txt_are_you_admin_or_customer'] in captured.out
+        assert user_controller.txts['txt_admin_option'] in captured.out
+        assert user_controller.txts['txt_customer_option'] in captured.out
+        assert user_controller.txts['txt_exit_option'] in captured.out
 
     def test_main_menu_invalid_choice(self, monkeypatch, capsys):
         inputs = iter(['invalid', '0'])  # First invalid, then exit
@@ -24,8 +24,8 @@ class TestUserController:
         with pytest.raises(SystemExit):
             UserController.user_main_menu()
         captured = capsys.readouterr()
-        assert txts.txt_invalid_choice in captured.out
-        assert txts.txt_welcome in captured.out  # Menu displayed again
+        assert user_controller.txts['txt_invalid_choice'] in captured.out
+        assert user_controller.txts['txt_welcome'] in captured.out  # Menu displayed again
 
     def test_admin_login_success(self, monkeypatch, capsys):
         # Simulate username and password input
