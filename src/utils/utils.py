@@ -11,10 +11,13 @@ Provides static methods for validation and other common tasks. such as:
 
 import datetime
 import re
-import os, json
+import os
+import json
+import sys
 
 
 class Utils:
+	
 
 	"""
 	Utility class providing static methods for validation and other common tasks in the car rental system.
@@ -66,7 +69,7 @@ class Utils:
 			return start_date >= today
 		except Exception:
 			return False
-
+	
 	@staticmethod
 	def is_end_date_valid(start_date_str, end_date_str, date_format="%Y-%m-%d"):
 		"""
@@ -100,9 +103,13 @@ class Utils:
 		Loads UI texts from JSON file based on language code ('en', 'maori').
 		Returns a dictionary of texts for the selected language.
 		"""
-		
-		base_path = os.path.dirname(__file__)
-		i18n_path = os.path.join(base_path, '..', 'i18n')
+		if getattr(sys, 'frozen', False):
+			# If running as a PyInstaller bundle
+			base_path = sys._MEIPASS
+			i18n_path = os.path.join(base_path, 'i18n')
+		else:
+			base_path = os.path.dirname(__file__)
+			i18n_path = os.path.join(base_path, '..', 'i18n')
 		file_map = {
 			'en': 'texts_en.json',
 			'maori': 'texts_maori.json'

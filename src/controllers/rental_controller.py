@@ -89,10 +89,12 @@ class RentalController:
             if not Utils.is_start_date_today_or_future(start_date):
                 print(rental_txts['start_date_invalid'])
                 continue
-            end_date = input(rental_txts['end_date_prompt']).strip()
-            if not Utils.is_end_date_valid(start_date, end_date):
-                print(rental_txts['end_date_invalid'])
-                continue
+            while True:
+                end_date = input(rental_txts['end_date_prompt']).strip()
+                if not Utils.is_end_date_valid(start_date, end_date):
+                    print(rental_txts['end_date_invalid'])
+                    continue
+                break
             break
         cars, car_status = RentalService.get_car_status_for_dates(start_date, end_date)
         available_cars = [car for car in cars if car_status.get(car[0], 'available') == 'available']

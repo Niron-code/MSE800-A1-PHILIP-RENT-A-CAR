@@ -75,7 +75,7 @@ class AdminUserController(UserController):
             AdminUserController.admin_menu(username, texts)
         else:
             print(user_txts['txt_invalid_admin_credentials'])
-            UserController.user_main_menu(texts)
+            AdminUserController.admin_login(texts)
 
     @staticmethod
     def admin_menu(username, texts):
@@ -196,7 +196,7 @@ class CustomerUserController(UserController):
             CustomerUserController.customer_main_menu(user, texts)
         else:
             print(user_txts['txt_invalid_customer_credentials'])
-            CustomerUserController.customer_menu(texts)
+            CustomerUserController.customer_login(texts)
 
     @staticmethod
     def customer_main_menu(user, texts):
