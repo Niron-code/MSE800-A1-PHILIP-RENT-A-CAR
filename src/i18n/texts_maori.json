@@ -1,5 +1,9 @@
 {
   "UserTexts": {
+  "txt_select_language": "Kōwhiria te Reo / Select Language:",
+  "txt_language_english": "1. Pākehā",
+  "txt_language_maori": "2. Māori",
+  "txt_language_prompt": "Tāuruhia te kōwhiringa (1/2): ",
     "txt_admin_option": "1. Kaiwhakahaere",
     "txt_customer_option": "2. Kiritaki",
     "txt_exit_option": "0. Putaatu",

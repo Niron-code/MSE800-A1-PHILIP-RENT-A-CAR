@@ -1,5 +1,9 @@
 {
   "UserTexts": {
+  "txt_select_language": "Select Language / Kōwhiria te Reo:",
+  "txt_language_english": "1. English",
+  "txt_language_maori": "2. Māori",
+  "txt_language_prompt": "Enter choice (1/2): ",
     "txt_admin_option": "1. Admin",
     "txt_customer_option": "2. Customer",
     "txt_exit_option": "0. Exit",
