@@ -2,14 +2,20 @@
 utils.py
 
 Utility module for the car rental system.
-Provides static methods for input validation (password, email) and date checks (start/end dates).
+Provides static methods for validation and other common tasks. such as:
+- Password and email validation	
+- Date checks for rental periods
+- clear_screen(): the standard method for clearing the terminal screen before displaying menus or after logout, ensuring a consistent UI experience. Use Utils.clear_screen() instead of direct os.system calls throughout the application.
+- load_texts(): loads UI texts from JSON files based on selected language (English or Māori).
 """
 
 import datetime
 import re
+import os, json
 
 
 class Utils:
+
 	"""
 	Utility class providing static methods for validation and other common tasks in the car rental system.
 
@@ -86,3 +92,22 @@ class Utils:
 		"""
 		import os
 		os.system('cls' if os.name == 'nt' else 'clear')
+
+	
+	@staticmethod
+	def load_texts(language):
+		"""
+		Loads UI texts from JSON file based on language code ('en', 'maori').
+		Returns a dictionary of texts for the selected language.
+		"""
+		
+		base_path = os.path.dirname(__file__)
+		i18n_path = os.path.join(base_path, '..', 'i18n')
+		file_map = {
+			'en': 'texts_en.json',
+			'maori': 'texts_maori.json'
+		}
+		file_name = file_map.get(language, 'texts_en.json')
+		file_path = os.path.join(i18n_path, file_name)
+		with open(file_path, 'r', encoding='utf-8') as f:
+			return json.load(f)

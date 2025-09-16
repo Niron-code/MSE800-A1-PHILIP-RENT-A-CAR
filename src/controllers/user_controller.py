@@ -22,15 +22,14 @@ CustomerUserController = None
 class UserController:
     @staticmethod
     def entry_point():
-        from utils.text_loader import load_texts
         # Always load English first for language selection
-        texts_en = load_texts('en')
+        texts_en = Utils.load_texts('en')
         print(texts_en['UserTexts']['txt_select_language'])
         print(texts_en['UserTexts']['txt_language_english'])
         print(texts_en['UserTexts']['txt_language_maori'])
         lang_choice = input(texts_en['UserTexts']['txt_language_prompt']).strip()
         language = 'maori' if lang_choice == '2' else 'en'
-        texts = load_texts(language)
+        texts = Utils.load_texts(language)
         # Call main menu using self class reference
         globals()['UserController'].user_main_menu(texts)
 

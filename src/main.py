@@ -9,7 +9,6 @@ Implements a lock file to prevent multiple simultaneous runs of the application.
 
 from controllers.user_controller import UserController
 from database import Database
-from utils.text_loader import load_texts
 
 
 class PhilipRentACarApp:
