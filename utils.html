@@ -44,7 +44,11 @@
 <span id="utils-utils-module"></span><h2>utils.utils module<a class="headerlink" href="#module-utils.utils" title="Link to this heading">¶</a></h2>
 <p>utils.py</p>
 <p>Utility module for the car rental system.
-Provides static methods for input validation (password, email) and date checks (start/end dates).</p>
+Provides static methods for validation and other common tasks. such as:
+- Password and email validation 
+- Date checks for rental periods
+- clear_screen(): the standard method for clearing the terminal screen before displaying menus or after logout, ensuring a consistent UI experience. Use Utils.clear_screen() instead of direct os.system calls throughout the application.
+- load_texts(): loads UI texts from JSON files based on selected language (English or Māori).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.utils.Utils">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.utils.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><a class="headerlink" href="#utils.utils.Utils" title="Link to this definition">¶</a></dt>
@@ -92,6 +96,13 @@ Returns True if valid, False otherwise.</p>
 2. Contains both alphanumeric characters and symbols
 3. No single character repeats consecutively
 Returns True if valid, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.utils.Utils.load_texts">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_texts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#utils.utils.Utils.load_texts" title="Link to this definition">¶</a></dt>
+<dd><p>Loads UI texts from JSON file based on language code (‘en’, ‘maori’).
+Returns a dictionary of texts for the selected language.</p>
 </dd></dl>
 
 </dd></dl>
