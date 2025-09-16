@@ -58,7 +58,6 @@ A user-friendly car rental management system for Windows, supporting both admin 
 1. Clone this repository:
    ```
    git clone https://github.com/Niron-code/MSE800-A1-PHILIP-RENT-A-CAR
-   cd yourrepo
    ```
 2. Install dependencies:
    ```
