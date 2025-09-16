@@ -4,13 +4,13 @@ A user-friendly car rental management system for Windows, supporting both admin 
 
 ## Features
 - **English & Māori Language Support**: All menus, prompts, and email notifications are available in both English and Māori. Users select their preferred language at startup.
-**Admin & Customer Roles**: Secure login and registration for both admins and customers.
-**Car Management**: Add, update, delete, and view cars (admin only).
-**Rental Booking**: Customers can book, view, update, and cancel rentals.
-**Approval Workflow**: Admins approve or reject rental requests.
-**Password Management**: Secure password validation and change options.
-**Email Notifications**: Receive booking updates via email.
-**Clear UI**: Consistent, easy-to-navigate menus with screen clearing for a clean experience.
+- **Admin & Customer Roles**: Secure login and registration for both admins and customers.
+- **Car Management**: Add, update, delete, and view cars (admin only).
+- **Rental Booking**: Customers can book, view, update, and cancel rentals.
+- **Approval Workflow**: Admins approve or reject rental requests.
+- **Password Management**: Secure password validation and change options.
+- **Email Notifications**: Receive booking updates via email.
+- **Clear UI**: Consistent, easy-to-navigate menus with screen clearing for a clean experience.
 
 ## Project Structure
 
