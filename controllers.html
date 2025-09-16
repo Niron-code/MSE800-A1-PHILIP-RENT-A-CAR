@@ -52,7 +52,7 @@ Relies on CarService for business logic and database operations.</p>
 Provides static methods to interact with the car management menu and handle user actions.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.car_controller.CarController.management_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">management_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.car_controller.CarController.management_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">management_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.car_controller.CarController.management_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the car management menu and handles user input for car operations.</p>
 </dd></dl>
 
@@ -74,7 +74,7 @@ Handles user interaction for booking, approving, updating, and cancelling rental
 Relies on RentalService and EmailService for business logic and notifications.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.rental_controller.RentalController.book_rental_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">book_rental_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.book_rental_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">book_rental_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.book_rental_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Allows a customer to book a rental car by selecting dates and a car.
 Validates date input and displays available cars for the selected period.
 Calculates total fee and confirms booking with the user.</p>
@@ -82,14 +82,14 @@ Calculates total fee and confirms booking with the user.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.rental_controller.RentalController.customer_booking_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_booking_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.customer_booking_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_booking_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.customer_booking_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the customer booking menu for managing bookings.
 Allows viewing, cancelling, and updating bookings for the logged-in customer.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.rental_controller.RentalController.rental_approval_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rental_approval_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.rental_approval_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rental_approval_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.rental_controller.RentalController.rental_approval_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the rental approval menu for admin users.
 Allows admins to approve or reject pending rental requests and sends notification emails.</p>
 </dd></dl>
@@ -109,14 +109,14 @@ Relies on UserService and related services for business logic and data operation
 <dd><p>Bases: <a class="reference internal" href="#controllers.user_controller.UserController" title="controllers.user_controller.UserController"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserController</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.AdminUserController.admin_login">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_login" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_login" title="Link to this definition">¶</a></dt>
 <dd><p>Handles admin login process and authentication.
 Navigates to admin menu on successful login.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.AdminUserController.admin_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">admin_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.AdminUserController.admin_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the admin menu and handles admin actions such as car management,
 rental approval, and password changes.</p>
 </dd></dl>
@@ -129,35 +129,35 @@ rental approval, and password changes.</p>
 <dd><p>Bases: <a class="reference internal" href="#controllers.user_controller.UserController" title="controllers.user_controller.UserController"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserController</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.change_password">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.change_password" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">change_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.change_password" title="Link to this definition">¶</a></dt>
 <dd><p>Handles the password change process for customers.
 Validates current and new passwords, and calls CustomerService to update the password.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_login">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_login" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_login" title="Link to this definition">¶</a></dt>
 <dd><p>Handles customer login process and authentication.
 Navigates to customer main menu on successful login.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_main_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_main_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_main_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_main_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_main_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the main menu for logged-in customers and handles actions such as booking rentals,
 managing bookings, changing password, and logging out.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the customer menu for new or existing customers.
 Handles navigation to registration or login flows.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.CustomerUserController.customer_signup">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_signup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_signup" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customer_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.CustomerUserController.customer_signup" title="Link to this definition">¶</a></dt>
 <dd><p>Handles customer registration, including username, email, and password validation.
 Calls UserService to register the new customer.</p>
 </dd></dl>
@@ -170,7 +170,7 @@ Calls UserService to register the new customer.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="controllers.user_controller.UserController.user_main_menu">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_main_menu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.UserController.user_main_menu" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_main_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#controllers.user_controller.UserController.user_main_menu" title="Link to this definition">¶</a></dt>
 <dd><p>Displays the main menu for user selection (admin or customer).
 Handles navigation to admin or customer login/registration flows.</p>
 </dd></dl>
