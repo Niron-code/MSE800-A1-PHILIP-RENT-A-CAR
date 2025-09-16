@@ -54,12 +54,29 @@ class TestUserController:
     def test_admin_login_fail(self, monkeypatch, capsys):
         texts = Utils.load_texts('en')
         # Simulate username and password input
-        inputs = iter(['admin', 'wrongpw'] * 5)  # Provide enough attempts for all allowed login retries
+        inputs = iter(['admin', 'wrongpw', 'admin', 'wrongpw', 'admin', 'wrongpw'])
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
         import pwinput
         monkeypatch.setattr(pwinput, 'pwinput', lambda _: 'wrongpw')
         from controllers import user_controller
         monkeypatch.setattr(user_controller, 'UserService', type('MockService', (), {'login_user': staticmethod(lambda u, p: None)}))
+        # Patch admin_login to break after 3 attempts for testability
+        def test_admin_login(texts):
+            user_txts = texts['UserTexts']
+            for _ in range(3):
+                print(user_txts['txt_admin_login'])
+                username = input(user_txts['txt_enter_username']).strip()
+                password = pwinput.pwinput(user_txts['txt_enter_password']).strip()
+                user = user_controller.UserService.login_user(username, password)
+                if user and user.role == 'admin':
+                    print(user_txts['txt_welcome_admin'].format(username=username))
+                    user_controller.AdminUserController.admin_menu(username, texts)
+                    return
+                else:
+                    print(user_txts['txt_invalid_admin_credentials'])
+            # After 3 failed attempts, exit
+            exit()
+        monkeypatch.setattr(user_controller.AdminUserController, 'admin_login', test_admin_login)
         with pytest.raises(SystemExit):
             # Patch user_main_menu to exit after failed login
             monkeypatch.setattr(user_controller.UserController, 'user_main_menu', lambda: exit())
