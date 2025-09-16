@@ -156,10 +156,10 @@
     "end_date_invalid": "End date must be in the future and not before start date."
   },
   "EmailTexts": {
-    "approval_subject": "Your Rental Approved!",
-    "approval_body": "Dear Customer,\n\nYour rental for {car_make} {car_model} from {start_date} to {end_date} has been approved. Total fee: ${amount}.\n\nThank you for choosing Philip Rent-A-Car!",
-    "rejection_subject": "Your Rental Request Rejected",
-  "rejection_body": "Dear Customer,\n\nUnfortunately, your rental request for {car_make} {car_model} from {start_date} to {end_date} was not approved.\n\nPlease contact us for more information.",
-  "email_sent": "Email sent to {to_email}"
+    "approval_subject": "Philip Rent-A-Car: Your Rental Approved!",
+  "approval_body": "Dear Customer,\n\nYour rental for {car_make} {car_model} from {start_date} to {end_date} has been approved. Total fee: ${amount}.\nPay on pickup.\n\nThank you for choosing Philip Rent-A-Car!",
+    "rejection_subject": "Philip Rent-A-Car: Your Rental Request Rejected",
+    "rejection_body": "Dear Customer,\n\nUnfortunately, your rental request for {car_make} {car_model} from {start_date} to {end_date} was not approved.\n\nPlease contact us for more information.",
+    "email_sent": "Email sent to {to_email}"
   }
 }
