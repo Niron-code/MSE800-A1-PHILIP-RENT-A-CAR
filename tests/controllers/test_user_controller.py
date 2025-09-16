@@ -10,7 +10,7 @@ class TestUserController:
         # Simulate user entering '0' to exit
         monkeypatch.setattr('builtins.input', lambda _: '0')
         with pytest.raises(SystemExit):
-            UserController.user_main_menu()
+            UserController.user_main_menu(user_controller.txts)
         captured = capsys.readouterr()
         assert user_controller.txts['txt_welcome'] in captured.out
         assert user_controller.txts['txt_are_you_admin_or_customer'] in captured.out
@@ -22,7 +22,7 @@ class TestUserController:
         inputs = iter(['invalid', '0'])  # First invalid, then exit
         monkeypatch.setattr('builtins.input', lambda _: next(inputs))
         with pytest.raises(SystemExit):
-            UserController.user_main_menu()
+            UserController.user_main_menu(user_controller.txts)
         captured = capsys.readouterr()
         assert user_controller.txts['txt_invalid_choice'] in captured.out
         assert user_controller.txts['txt_welcome'] in captured.out  # Menu displayed again
@@ -43,10 +43,10 @@ class TestUserController:
         # Patch admin_menu to exit after login
         monkeypatch.setattr(user_controller.AdminUserController, 'admin_menu', lambda username: exit())
         with pytest.raises(SystemExit):
-            user_controller.AdminUserController.admin_login()
+            user_controller.AdminUserController.admin_login(user_controller.txts)
         captured = capsys.readouterr()
-        assert user_controller.txts.txt_admin_login in captured.out
-        assert user_controller.txts.txt_welcome_admin.format(username='admin') in captured.out
+        assert user_controller.txts['txt_admin_login'] in captured.out
+        assert user_controller.txts['txt_welcome_admin'].format(username='admin') in captured.out
 
     def test_admin_login_fail(self, monkeypatch, capsys):
         # Simulate username and password input
@@ -59,8 +59,8 @@ class TestUserController:
         with pytest.raises(SystemExit):
             # Patch user_main_menu to exit after failed login
             monkeypatch.setattr(user_controller.UserController, 'user_main_menu', lambda: exit())
-            user_controller.AdminUserController.admin_login()
+            user_controller.AdminUserController.admin_login(user_controller.txts)
         captured = capsys.readouterr()
-        assert user_controller.txts.txt_admin_login in captured.out
-        assert user_controller.txts.txt_invalid_admin_credentials in captured.out
+        assert user_controller.txts['txt_admin_login'] in captured.out
+        assert user_controller.txts['txt_invalid_admin_credentials'] in captured.out
 
