@@ -118,14 +118,14 @@ class RentalDAO:
     @staticmethod
     def cancel_booking(rental_id: int, user_id: int) -> bool:
         """
-        Cancels a booking if it belongs to the user and is not already cancelled.
+        Cancels a booking if it belongs to the user and is pending.
         Returns True if the operation is successful, False otherwise.
         """
         conn = Database.get_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT status FROM rentals WHERE id=? AND user_id=?', (rental_id, user_id))
         result = cursor.fetchone()
-        if result and result[0] != 'cancelled':
+        if result and result[0] == 'pending':
             cursor.execute('UPDATE rentals SET status="cancelled" WHERE id=? AND user_id=?', (rental_id, user_id))
             conn.commit()
             conn.close()
