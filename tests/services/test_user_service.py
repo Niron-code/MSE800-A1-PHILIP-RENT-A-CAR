@@ -53,7 +53,7 @@ class TestUserService:
 
     def test_login_user(self):
         DummyUserDAO.users.clear()
-        UserService.register_user('bob', 'secret', 'bob@email.com', 'admin')
+        UserService.register_user('bob', 'bob@email.com', 'secret', 'admin')
         user = UserService.login_user('bob', 'secret')
         assert user is not None
         assert user.username == 'bob'
@@ -61,14 +61,14 @@ class TestUserService:
 
     def test_admin_password_change(self):
         DummyUserDAO.users.clear()
-        UserService.register_user('admin', 'old', 'admin@email.com', 'admin')
+        UserService.register_user('admin', 'admin@email.com', 'old', 'admin')
         assert AdminService.change_admin_password('admin', 'old', 'new') is True
         assert AdminService.change_admin_password('admin', 'old', 'new2') is False
         assert AdminService.change_admin_password('admin', 'new', 'new2') is True
 
     def test_customer_password_change(self):
         DummyUserDAO.users.clear()
-        UserService.register_user('cust', 'old', 'cust@email.com', 'customer')
+        UserService.register_user('cust', 'cust@email.com', 'old', 'customer')
         assert CustomerService.change_customer_password('cust', 'old', 'new') is True
         assert CustomerService.change_customer_password('cust', 'old', 'new2') is False
         assert CustomerService.change_customer_password('cust', 'new', 'new2') is True
