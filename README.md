@@ -82,6 +82,9 @@ A user-friendly car rental management system for Windows, supporting both admin 
 ### v1.1.0 (September 2025)
 - **Māori Language Support**: The entire application now supports both English and Māori. All menus, prompts, and email notifications are fully internationalized. Users can select their preferred language at startup.
 
+### v1.1.1 (September 2025)
+- **General bug fix**: Resolved signup issues—email is now stored correctly and registration is reliable for all new users. Existing users may continue with v1.1.0, but upgrading to v1.1.1 is strongly recommended for best experience.
+
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
