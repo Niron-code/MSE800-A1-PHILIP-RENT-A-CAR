@@ -172,7 +172,7 @@ class CustomerUserController(UserController):
                 print(user_txts['txt_password_invalid'])
                 continue
             break
-        success = UserService.register_customer(username, email, password)
+        success = UserService.register_user(username, email, password, "customer")
         if success:
             print(user_txts['txt_registration_success'])
             CustomerUserController.customer_login(texts)

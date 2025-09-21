@@ -14,7 +14,7 @@ class UserService:
     Handles registration and authentication, delegating database operations to UserDAO.
     """
     @staticmethod
-    def register_user(username: str, password: str, email: str, role: str) -> bool:
+    def register_user(username: str, email: str, password: str, role: str) -> bool:
         """
         Register a new user. Returns True if successful, False if username exists.
         """
@@ -64,4 +64,4 @@ class CustomerService(UserService):
         Register a new customer.
         Returns True if the operation is successful, False otherwise.
         """
-        return UserService.register_user(username, password, email, 'customer')
+        success = UserService.register_user(username, email, password, "customer")

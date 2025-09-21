@@ -58,7 +58,7 @@ class UserDAO:
         conn, cursor = Database.get_conn_cursor()
         try:
             hashed_pw = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-            cursor.execute('INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)', (user.username, hashed_pw, user.role, user.email))
+            cursor.execute('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', (user.username, user.email, hashed_pw, user.role))
             conn.commit()
             return True
         except Exception:
